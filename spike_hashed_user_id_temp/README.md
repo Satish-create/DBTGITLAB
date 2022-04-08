@@ -61,19 +61,20 @@ select pseudonymize_attribute('hello world')
 
 * Crate test schema under test database:
 ```snowflake
-create schema {schema_name}.HASHED_USER_ID_TEST;
+CREATE SCHEMA {schema_name}.HASHED_USER_ID_TEST_TABLES;
 
-grant create table, usage on schema {schema_name}.HASHED_USER_ID_TEST to LOADER;
-grant create table, usage on schema {schema_name}.HASHED_USER_ID_TEST to TRANSFORMER;
-grant create table, usage on schema {schema_name}.HASHED_USER_ID_TEST to ENGINEER;
+GRANT CREATE TABLE, usage ON schema {schema_name}.HASHED_USER_ID_TEST_TABLES to LOADER;
+GRANT CREATE TABLE, usage ON schema {schema_name}.HASHED_USER_ID_TEST_TABLES to TRANSFORMER;
+GRANT CREATE TABLE, usage ON schema {schema_name}.HASHED_USER_ID_TEST_TABLES to ENGINEER;
 ```
 
 ### Workflow
 
 * Create `CLONED` table:
 ```snowflake
-CREATE TABLE {schema_name}.GITLAB_DB_MERGE_REQUREST CLONE {schema_name}.TAP_POSTGRES.GITLAB_DB_MERGE_REQUESTS;
+CREATE TABLE {schema_name}.HASHED_USER_ID_TEST_TABLES.GITLAB_DB_MERGE_REQUREST CLONE {schema_name}.TAP_POSTGRES.GITLAB_DB_MERGE_REQUESTS;
 ```
+
 * Mask data using `Java UDF function`:
 ```snowflake
 
@@ -89,12 +90,13 @@ CREATE TABLE {schema_name}.GITLAB_DB_MERGE_REQUREST CLONE {schema_name}.TAP_POST
 
 * Crate test schema under test database:
 ```snowflake
-create schema {schema_name}.HASHED_USER_ID_TEST;
+CREATE SCHEMA {schema_name}.HASHED_USER_ID_TEST_VIEWS;
 
-grant create table, usage on schema {schema_name}.HASHED_USER_ID_TEST to LOADER;
-grant create table, usage on schema {schema_name}.HASHED_USER_ID_TEST to TRANSFORMER;
-grant create table, usage on schema {schema_name}.HASHED_USER_ID_TEST to ENGINEER;
+GRANT CREATE TABLE, usage ON schema {schema_name}.HASHED_USER_ID_TEST_VIEWS to LOADER;
+GRANT CREATE TABLE, usage ON schema {schema_name}.HASHED_USER_ID_TEST_VIEWS to TRANSFORMER;
+GRANT CREATE TABLE, usage ON schema {schema_name}.HASHED_USER_ID_TEST_VIEWS to ENGINEER;
 ```
+
 ### Workflow
 
 ## 3. ↩️ DBT
