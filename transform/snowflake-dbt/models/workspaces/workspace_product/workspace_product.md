@@ -275,7 +275,13 @@ Use case: New dimension table to map metrics for service ping
 
 {% docs rpt_service_ping_counter_statistics %}
 
-Data mart to explore statistics around usage ping counters. This includes the following statistics:
+Type of Data: Instance-level Service Ping from Versions app
+
+Aggregate Grain: One record per metric (metrics_path)
+
+Time Grain: None
+
+Use case: Data mart to explore statistics around usage ping counters. This includes the following statistics:
 
   * first version
   * first major version
@@ -288,13 +294,25 @@ Data mart to explore statistics around usage ping counters. This includes the fo
 
 {% docs rpt_service_ping_instance_subcription_opt_in_monthly %}
 
-Monthly counts of active subscriptions.
+Type of Data: Instance-level Service Ping from Versions app
+
+Aggregate Grain: One record per metric (metrics_path)
+
+Time Grain: Month (28 day)
+
+Use case: Monthly counts of active subscriptions, this DOES NOT take into account the version of instance while generating the counts.
 
 {% enddocs %}
 
 {% docs rpt_service_ping_instance_subcription_metric_opt_in_monthly %}
 
-Monthly counts of active subscriptions.
+Type of Data: Instance-level Service Ping from Versions app
+
+Aggregate Grain: One record per metric (metrics_path)
+
+Time Grain: Month (28 day)
+
+Use case: Monthly counts of active subscriptions, this takes into account the version of instance while generating the counts.
 
 {% enddocs %}
 
