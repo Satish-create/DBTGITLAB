@@ -1,0 +1,15 @@
+version: 2
+
+models:
+    - name: test_table
+      description: This is a test table
+      columns:
+        - name: the_float
+          data_type: number
+          meta: 
+            masking_policy: policy_1
+            other_stuff: things    
+        - name: the_varchar
+          data_type: string
+          meta:
+            masking_policy: policy_2
