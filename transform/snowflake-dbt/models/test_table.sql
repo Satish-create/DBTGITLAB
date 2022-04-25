@@ -1,3 +1,5 @@
+{{ config({ "post-hook": '{{ get_masking_policy() }}'}) }}
+
 select
   'A'::VARCHAR AS the_varchar,
   0.01::FLOAT AS the_float,
@@ -8,4 +10,7 @@ select
   '2022-04-18 01:01:01'::TIMESTAMP AS the_timestamp,
   TRUE::BOOLEAN AS the_boolean
 
-  {{ set_masking_policy() }}
+/*
+  {{ get_masking_policy() }}
+
+*/

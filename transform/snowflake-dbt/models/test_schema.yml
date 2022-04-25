@@ -7,9 +7,25 @@ models:
         - name: the_float
           data_type: number
           meta: 
-            masking_policy: policy_1
+            masking_policy: dbt_analytics
             other_stuff: things    
         - name: the_varchar
           data_type: string
           meta:
-            masking_policy: policy_2
+            masking_policy: analyst_people
+        - name: the_int
+          meta:
+            masking_policy: dbt_analytics
+        - name: the_array
+          meta:
+            masking_policy: dbt_analytics
+        - name: the_variant
+        - name: the_date
+          meta:
+            masking_policy: dbt_analytics
+        - name: the_timestamp
+          meta:
+            masking_policy: analyst_people
+        - name: the_boolean
+          meta:
+            masking_policy: engineer

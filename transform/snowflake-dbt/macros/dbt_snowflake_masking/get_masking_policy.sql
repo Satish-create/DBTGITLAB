@@ -1,11 +1,11 @@
-{% macro set_masking_policy() %}
+{%- macro get_masking_policy() -%}
 
 
 {% set database = this.database  %}
 {% set schema = this.schema  %}
 {% set alias = this.name  %}
 
-{% set column_data_type_query %}
+{%- set column_data_type_query -%}
 SELECT
   t.table_catalog,
   t.table_schema,
@@ -24,61 +24,65 @@ WHERE t.table_catalog =  '{{ database.upper() }}' --'PEMPEY_PROD'
 ORDER BY t.table_schema,
   t.table_name;
 
-{% endset %}
+{%- endset -%}
 
 {% set column_policies = []  %}
 {% set column_info = dict()  %}
 
 
-{% if execute %}
+{%- if execute -%}
 
 {%- set result = run_query(column_data_type_query) %}
-'{{ result }}'
+{# '{{ result }}' #}
 {# {{ log(result, info=true) }} #}
 
-  {% for node in graph.nodes.values()
+  {%- for node in graph.nodes.values()
      | selectattr("resource_type", "equalto", "model")
      | selectattr("name", "equalto", "test_table")
  
-  %}
+  -%}
   
     {# {% do log(node.columns, info=true) %} #}
 
-    {% for column in node.columns.values()
+    {%- for column in node.columns.values()
      | selectattr("meta")
-    %}
+    -%}
         {# {% do log(column.meta, info=true) %} #}
 
-        {% if column.meta['masking_policy'] %}
+        {%- if column.meta['masking_policy'] -%}
         
           {# {% do log(column.name ~ ", has a masking policy of: " ~ column.meta['masking_policy'] ~ "_" ~ column.data_type, info=true) %} #}
-          {% set column_info = ({"COLUMN_NAME" : column.name.upper() , "POLICY_NAME" : column.meta['masking_policy']  }) %}
+          {% set column_info = ({"COLUMN_NAME" : column.name.upper() , "POLICY_NAME" : column.meta['masking_policy'].upper()  }) %}
           {% do column_policies.append(column_info) %}
 
-        {% endif %}
+        {%- endif -%}
 
-    {% endfor %}
+    {%- endfor -%}
 
     
   
-  {% endfor %}
+  {%- endfor -%}
 
-  {% do log(column_policies, info=true) %}
+  {# {% do log(column_policies, info=true) %} #}
 
-  {% for policy in column_policies  %}
+  {%- for policy in column_policies  -%}
 
-    {% for row in result.rows if row['COLUMN_NAME'] == policy['COLUMN_NAME'] %} 
+    {%- for row in result.rows if row['COLUMN_NAME'] == policy['COLUMN_NAME'] -%} 
 
-      {% do log("database: " ~ row['TABLE_CATALOG'] ~ " schema: " ~ row['TABLE_SCHEMA'] ~ " table_name: " ~ row['TABLE_NAME']  ~ " table_type: " ~ row['TABLE_TYPE'] ~ " column_name: " ~ row['COLUMN_NAME'] ~ " data_type: " ~ row['DATA_TYPE'] ~ " policy: " ~ policy['POLICY_NAME'], info=true) %}
+      {# {% do log("database: " ~ row['TABLE_CATALOG'] ~ " schema: " ~ row['TABLE_SCHEMA'] ~ " table_name: " ~ row['TABLE_NAME']  ~ " table_type: " ~ row['TABLE_TYPE'] ~ " column_name: " ~ row['COLUMN_NAME'] ~ " data_type: " ~ row['DATA_TYPE'] ~ " policy: " ~ policy['POLICY_NAME'], info=true) %} #}
 
       {# database, schema, table_name, column_name, data_type, role #}
 
-    {% endfor %}    
+      {{ create_masking_policy(row['TABLE_CATALOG'], row['TABLE_SCHEMA'], row['DATA_TYPE'], policy['POLICY_NAME']) }}
 
-  {% endfor %}
+      {{ set_masking_policy(row['TABLE_CATALOG'], row['TABLE_SCHEMA'], row['TABLE_NAME'], row['TABLE_TYPE'], row['COLUMN_NAME'], row['DATA_TYPE'], policy['POLICY_NAME']) }}
 
-{% endif %}
+    {%- endfor -%}    
+
+  {%- endfor -%}
+
+{%- endif -%}
 
 
 
-{% endmacro %}
+{%- endmacro -%}
