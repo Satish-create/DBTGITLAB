@@ -3,7 +3,7 @@
 
 {% set database = this.database  %}
 {% set schema = this.schema  %}
-{% set alias = this.name  %}
+{% set alias = this.identifier %} 
 
 {%- set column_data_type_query -%}
 SELECT
@@ -70,8 +70,6 @@ ORDER BY t.table_schema,
     {%- for row in result.rows if row['COLUMN_NAME'] == policy['COLUMN_NAME'] -%} 
 
       {# {% do log("database: " ~ row['TABLE_CATALOG'] ~ " schema: " ~ row['TABLE_SCHEMA'] ~ " table_name: " ~ row['TABLE_NAME']  ~ " table_type: " ~ row['TABLE_TYPE'] ~ " column_name: " ~ row['COLUMN_NAME'] ~ " data_type: " ~ row['DATA_TYPE'] ~ " policy: " ~ policy['POLICY_NAME'], info=true) %} #}
-
-      {# database, schema, table_name, column_name, data_type, role #}
 
       {{ create_masking_policy(row['TABLE_CATALOG'], row['TABLE_SCHEMA'], row['DATA_TYPE'], policy['POLICY_NAME']) }}
 

@@ -12,7 +12,7 @@ models:
         - name: the_varchar
           data_type: string
           meta:
-            masking_policy: analyst_people
+            masking_policy: pempey
         - name: the_int
           meta:
             masking_policy: dbt_analytics
@@ -22,7 +22,7 @@ models:
         - name: the_variant
         - name: the_date
           meta:
-            masking_policy: dbt_analytics
+            masking_policy: pempey
         - name: the_timestamp
           meta:
             masking_policy: analyst_people
