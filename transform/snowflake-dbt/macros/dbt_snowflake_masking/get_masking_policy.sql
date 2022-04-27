@@ -32,17 +32,13 @@ ORDER BY t.table_schema,
 
 {%- if execute -%}
 
-{%- set result = run_query(column_data_type_query) %}
-{# '{{ result }}' #}
-{# {{ log(result, info=true) }} #}
-
   {%- for node in graph.nodes.values()
      | selectattr("resource_type", "equalto", "model")
-     | selectattr("name", "equalto", "test_table")
+     | selectattr("name", "equalto", alias.lower())
  
   -%}
   
-    {# {% do log(node.columns, info=true) %} #}
+     {# {% do log(node.columns, info=true) %} #}
 
     {%- for column in node.columns.values()
      | selectattr("meta")
@@ -58,26 +54,30 @@ ORDER BY t.table_schema,
         {%- endif -%}
 
     {%- endfor -%}
-
-    
   
   {%- endfor -%}
 
   {# {% do log(column_policies, info=true) %} #}
 
-  {%- for policy in column_policies  -%}
+  {% if column_policies %}
 
-    {%- for row in result.rows if row['COLUMN_NAME'] == policy['COLUMN_NAME'] -%} 
+    {%- set result = run_query(column_data_type_query) %}
 
-      {# {% do log("database: " ~ row['TABLE_CATALOG'] ~ " schema: " ~ row['TABLE_SCHEMA'] ~ " table_name: " ~ row['TABLE_NAME']  ~ " table_type: " ~ row['TABLE_TYPE'] ~ " column_name: " ~ row['COLUMN_NAME'] ~ " data_type: " ~ row['DATA_TYPE'] ~ " policy: " ~ policy['POLICY_NAME'], info=true) %} #}
+    {%- for policy in column_policies  -%}
 
-      {{ create_masking_policy(row['TABLE_CATALOG'], row['TABLE_SCHEMA'], row['DATA_TYPE'], policy['POLICY_NAME']) }}
+      {%- for row in result.rows if row['COLUMN_NAME'] == policy['COLUMN_NAME'] -%} 
 
-      {{ set_masking_policy(row['TABLE_CATALOG'], row['TABLE_SCHEMA'], row['TABLE_NAME'], row['TABLE_TYPE'], row['COLUMN_NAME'], row['DATA_TYPE'], policy['POLICY_NAME']) }}
+        {# {% do log("database: " ~ row['TABLE_CATALOG'] ~ " schema: " ~ row['TABLE_SCHEMA'] ~ " table_name: " ~ row['TABLE_NAME']  ~ " table_type: " ~ row['TABLE_TYPE'] ~ " column_name: " ~ row['COLUMN_NAME'] ~ " data_type: " ~ row['DATA_TYPE'] ~ " policy: " ~ policy['POLICY_NAME'], info=true) %} #}
 
-    {%- endfor -%}    
+        {{ create_masking_policy(row['TABLE_CATALOG'], row['TABLE_SCHEMA'], row['DATA_TYPE'], policy['POLICY_NAME']) }}
 
-  {%- endfor -%}
+        {{ set_masking_policy(row['TABLE_CATALOG'], row['TABLE_SCHEMA'], row['TABLE_NAME'], row['TABLE_TYPE'], row['COLUMN_NAME'], row['DATA_TYPE'], policy['POLICY_NAME']) }}
+
+      {%- endfor -%}    
+
+    {%- endfor -%}
+
+  {% endif %}
 
 {%- endif -%}
 

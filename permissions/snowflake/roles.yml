@@ -476,6 +476,7 @@ roles:
             - greenhouse
             - license_db
             - netsuite
+            - people_data_masking
             - postgres_pipeline
             - salesforce
             - sheetload
@@ -518,6 +519,7 @@ roles:
             - analyst_core
             - snowflake_db
             - data_team_analyst
+            - general_data_masking
 
     - analytics_engineer_ga:
         member_of:
@@ -628,6 +630,7 @@ roles:
             - snowflake_db
             - static_admin
             - zoominfo
+            - general_data_masking
         warehouses:
             - airflow_testing_l
             - engineer_xs
@@ -1030,6 +1033,17 @@ roles:
                     - prep.snowplow.snowplow_gitlab_good_events_source
                     - snowflake.account_usage.query_history
                     - raw.sheetload.hp_dvr
+
+# ==========================================
+# Data Masking Roles
+# ==========================================
+    - people_data_masking:
+        warehouses:
+            - reporting
+    - general_data_masking:
+        warehouses:
+            - reporting
+
            
 # ==========================================
 # Object Roles
