@@ -574,31 +574,31 @@ roles:
             - zuora_central_sandbox
 
     - data_science_loader:
-        warehouses:
-            - loading
-        owns:
-            schemas:
-                - raw.data_science
-        privileges:
-            databases:
-                read:
-                    - prep
-                    - prod
-                    - raw
-                write:
-                    - prod
-                    - raw
-            schemas:
-                read:
-                    - prod.workspace_data_science
-                write:
-                    - raw.data_science
-            tables:
-                - raw.data_science.*
-                - prod.workspace_data_science.*
-            write:
-                - raw.data_science.*
-                - prod.workspace_data_science.*
+          warehouses:
+              - loading
+          owns:
+              schemas:
+                  - raw.data_science
+          privileges:
+              databases:
+                  read:
+                      - prep
+                      - prod
+                      - raw
+                  write:
+                      - prod
+                      - raw
+              schemas:
+                  read:
+                      - prod.workspace_data_science
+                  write:
+                      - raw.data_science
+              tables:
+                  - raw.data_science.*
+                  - prod.workspace_data_science.*
+              write:
+                  - raw.data_science.*
+                  - prod.workspace_data_science.*
 
     - decisive_data:
         warehouses:
@@ -4358,6 +4358,7 @@ users:
         can_login: yes
         member_of:
             - airflow
+            - data_science_loader
             - loader
             - reporter
             - sysadmin
