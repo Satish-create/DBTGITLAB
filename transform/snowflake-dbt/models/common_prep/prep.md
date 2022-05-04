@@ -790,7 +790,7 @@ The source data contains several versions of source data with different format. 
 
 {% enddocs %}
 
-{% docs prep_service_ping_instance %}
+{% docs prep_ping_instance %}
 
 Type of Data: Instance-level Service Ping from Versions app
 
