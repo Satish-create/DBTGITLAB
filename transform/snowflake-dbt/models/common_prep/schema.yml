@@ -1932,3 +1932,58 @@ models:
         tests:
           - not_null
           - unique
+
+  - name: prep_ping_instance
+    description: ' {{ doc("prep_ping_instance") }} '
+    columns:
+      - name: dim_ping_instance_id
+        tests:
+          - not_null
+          - unique
+        description: The unique identifier of the ping
+      - name: dim_host_id
+        description: The unique id of a host from the dim_host model (brought in from source data).
+      - name: dim_instance_id
+        description:  The uuid of an instance from the dim_instances model.
+      - name: ping_created_at
+        description: The time when the ping was created
+      - name: ip_address_hash
+        description: The source_ip_hash associated with the instance
+      - name: version
+        description: the version associated with the instance (9., 10., 11., ... 14.)
+      - name: instance_user_count
+        description: The total count of users on the instance
+      - name: license_md5
+        description: the license_md5 associated with teh instance
+      - name: historical_max_users
+        description: the max user number the instance has had
+      - name: license_user_count
+        description: the user count for the license
+      - name: license_starts_at
+        description: the date the license starts at
+      - name: license_expires_at
+        description:  the date the license ends on
+      - name: license_add_ons
+        description: the add ones associated with the license
+      - name: mattermost_enabled
+        description: denotes whether mattermost is enabled
+      - name: uuid
+        description: the unique id of the instance from the dim_instances model
+      - name: hostname
+        description: The name (URL) of the host
+      - name: host_id
+        description: The unique id of a host from the dim_host model (brought in from source data).
+      - name: license_trial
+        description: denoted whether the license is a trial or not
+      - name: source_license_id
+        description: the unique id of a source license
+      - name: installation_type
+        description: the type of installation associated with the instance (i.e. gitlab-development-kit, gitlab-helm-chart, gitlab-omnibus-helm-chart)
+      - name: license_plan
+        description: the license plan associated with the instance (i.e. Ultimate, Premium)
+      - name: database_adapter
+        description: the type of database adapter being usedd (i.e. mysql2, postgresql)
+      - name: database_version
+        description: the database version associated with the instance (i.e. 9.5.3)
+      - name: git_version
+        description: the version of gitlab the instance is running (i.e. 2.17.0, 2.33.1, 2.23.0)
