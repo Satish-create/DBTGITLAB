@@ -413,42 +413,6 @@ models:
         tests:
           - not_null
 
-  - name: gitlab_dotcom_clusters_applications_cert_managers_source
-    columns:
-      - name: clusters_applications_cert_managers_id
-        tags: ["tdf","gitlab_dotcom"]
-        tests:
-          - not_null
-          - unique
-      - name: cluster_id
-        tags: ["tdf","gitlab_dotcom"]
-        tests:
-          - not_null
-
-  - name: gitlab_dotcom_clusters_applications_crossplane_source
-    columns:
-      - name: clusters_applications_crossplane_id
-        tags: ["tdf","gitlab_dotcom"]
-        tests:
-          - not_null
-          - unique
-      - name: cluster_id
-        tags: ["tdf","gitlab_dotcom"]
-        tests:
-          - not_null
-
-  - name: gitlab_dotcom_clusters_applications_elastic_stacks_source
-    columns:
-      - name: clusters_applications_elastic_stacks_id
-        tags: ["tdf","gitlab_dotcom"]
-        tests:
-          - not_null
-          - unique
-      - name: cluster_id
-        tags: ["tdf","gitlab_dotcom"]
-        tests:
-          - not_null
-
   - name: gitlab_dotcom_clusters_applications_helm_source
     description: Base model for the Gitlab.com `clusters_applications_helm` table.
     columns:
@@ -474,33 +438,9 @@ models:
         tests:
           - not_null
 
-  - name: gitlab_dotcom_clusters_applications_jupyter_source
-    columns:
-      - name: clusters_applications_jupyter_id
-        tags: ["tdf","gitlab_dotcom"]
-        tests:
-          - not_null
-          - unique
-      - name: cluster_id
-        tags: ["tdf","gitlab_dotcom"]
-        tests:
-          - not_null
-
   - name: gitlab_dotcom_clusters_applications_knative_source
     columns:
       - name: clusters_applications_knative_id
-        tags: ["tdf","gitlab_dotcom"]
-        tests:
-          - not_null
-          - unique
-      - name: cluster_id
-        tags: ["tdf","gitlab_dotcom"]
-        tests:
-          - not_null
-
-  - name: gitlab_dotcom_clusters_applications_prometheus_source
-    columns:
-      - name: clusters_applications_prometheus_id
         tags: ["tdf","gitlab_dotcom"]
         tests:
           - not_null
