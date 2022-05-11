@@ -99,8 +99,10 @@
   <<: *snowflake_dbt_jobs
   script:
     - *deps_and_seed
-    - FILES=$(git diff --name-only $CI_MERGE_REQUEST_DIFF_BASE_SHA...HEAD)
-    - echo $FILES
+    - CHANGED_FILES=$(git diff --name-only $CI_MERGE_REQUEST_DIFF_BASE_SHA...HEAD | grep '\.sql'$)
+    - echo $CHANGED_FILES
+    - dbt --partial-parse run $CI_PROFILE_TARGET ${REFRESH:-"--full-refresh"} --models $CHANGED_FILES || FAILED=true
+    - dbt --partial-parse test $CI_PROFILE_TARGET --models $CHANGED_FILES || FAILED=true
     - if [ $FAILED ]; then exit 1; fi
 
 ➕🐭specify_model:
