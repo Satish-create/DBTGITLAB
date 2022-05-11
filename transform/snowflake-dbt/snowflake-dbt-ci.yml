@@ -95,6 +95,17 @@
     - dbt --partial-parse test $CI_PROFILE_TARGET --exclude $DBT_MODELS || FAILED=true
     - if [ $FAILED ]; then exit 1; fi
 
+➕🐭run_changed_models:
+  <<: *snowflake_dbt_jobs
+  before_script:
+    - CHANGED_FILES=$(git diff --name-only ${CI_COMMIT_SHA} origin/${CI_MERGE_REQUEST_TARGET_BRANCH_NAME} | grep '\.sql'$)
+  script:
+    - *deps_and_seed
+    - echo $CHANGED_FILES
+    - dbt --partial-parse run $CI_PROFILE_TARGET ${REFRESH:-"--full-refresh"} --models $CHANGED_FILES || FAILED=true
+    - dbt --partial-parse test $CI_PROFILE_TARGET --models $CHANGED_FILES || FAILED=true
+    - if [ $FAILED ]; then exit 1; fi
+
 ➕🐭specify_model:
   <<: *snowflake_dbt_jobs
   script:
