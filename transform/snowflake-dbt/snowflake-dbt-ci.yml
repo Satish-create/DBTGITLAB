@@ -95,7 +95,7 @@
     - dbt --partial-parse test $CI_PROFILE_TARGET --exclude $DBT_MODELS || FAILED=true
     - if [ $FAILED ]; then exit 1; fi
 
-➕🐭run_changed_models:
+➕🐭run_changed_models_sql:
   <<: *snowflake_dbt_jobs
   script:
     - *deps_and_seed
