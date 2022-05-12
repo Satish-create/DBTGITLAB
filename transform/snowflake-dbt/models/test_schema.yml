@@ -1,5 +1,14 @@
 version: 2
 
+sources:
+  - name: test_source
+    tables:
+      - name: test_source_table
+        columns:
+          - name: source_column
+            meta:
+              masking_policy: pempey
+
 models:
     - name: test_table
       description: This is a test table

@@ -12,5 +12,5 @@ select
 
 /*
   {{ get_masking_policy() }}
-
+ {{ source('test_source','test_source_table') }}
 */
