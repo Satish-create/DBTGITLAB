@@ -1,4 +1,4 @@
-{{ config({ "post-hook": '{{ get_masking_policy() }}'}) }}
+{{ config({ "post-hook": '{{ mask_model() }}'}) }}
 
 select
   'A'::VARCHAR AS the_varchar,
@@ -10,7 +10,7 @@ select
   '2022-04-18 01:01:01'::TIMESTAMP AS the_timestamp,
   TRUE::BOOLEAN AS the_boolean
 
-/*
-  {{ get_masking_policy() }}
+/*  {{ mask_model() }}
  {{ source('test_source','test_source_table') }}
+
 */

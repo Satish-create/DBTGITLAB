@@ -12,18 +12,18 @@ dbt run-operation get_columns_to_mask --args "{resource_type: 'model', table: 't
   {% do exceptions.raise_compiler_error('"resource_type" must be "source" or "model"')%}
 {% endif %}
 
-{% set database = none  %} {# this.database #}
-{% set schema = none  %} {# this.schema #}
-{% set alias = none %} {# this.identifier #}
+{# {% set database = none  %}  this.database #}
+{# {% set schema = none  %}  this.schema #}
+{# { % set alias = none %}  this.identifier #}
 
 
 
 {% if resource_type == 'source' %}
   {% set search_path = graph.sources.values() %}
-  {% set table_key = "identifier.upper()" %}
+  {% set table_key = 'identifier' %}
 {% elif resource_type == 'model' %}
   {% set search_path = graph.nodes.values() %}
-  {% set table_key = "alias.upper()" %}
+  {% set table_key = 'alias' %}
 {% endif %}
 
 {% if table %}
@@ -60,7 +60,7 @@ dbt run-operation get_columns_to_mask --args "{resource_type: 'model', table: 't
           {% set column_info = ({
             "DATABASE" : node.database.upper(),
             "SCHEMA" : node.schema.upper(),
-            "TABLE" : node.table_key,
+            "TABLE" : node[table_key].upper(),
             "COLUMN_NAME" : column.name.upper(), 
             "POLICY_NAME" : column.meta['masking_policy'].upper()  
           }) %}
@@ -72,7 +72,9 @@ dbt run-operation get_columns_to_mask --args "{resource_type: 'model', table: 't
   
   {%- endfor -%}
 
-  {% do log(column_policies, info=true) %} 
+  {# {% do log(column_policies, info=true) %} #}
+
+  {{ return(column_policies) }}
 
 
 {%- endif -%}

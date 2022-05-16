@@ -1,9 +1,9 @@
-{%- macro get_masking_policy() -%}
+{%- macro apply_masking_policy(database, schema, table, column_policies) -%}
 
 
-{% set database = this.database  %}
-{% set schema = this.schema  %}
-{% set alias = this.identifier %} 
+{# {% set database = this.database  %} #}
+{# {% set schema = this.schema  %} #}
+{% set alias = table %} 
 
 {%- set column_data_type_query -%}
 SELECT
@@ -26,36 +26,11 @@ ORDER BY t.table_schema,
 
 {%- endset -%}
 
-{% set column_policies = []  %}
+{# {% set column_policies = []  %} #}
 {% set column_info = dict()  %}
 
 
 {%- if execute -%}
-
-  {%- for node in graph.nodes.values()
-     | selectattr("resource_type", "equalto", "model")
-     | selectattr("name", "equalto", alias.lower())
- 
-  -%}
-  
-     {# {% do log(node.columns, info=true) %} #}
-
-    {%- for column in node.columns.values()
-     | selectattr("meta")
-    -%}
-        {# {% do log(column.meta, info=true) %} #}
-
-        {%- if column.meta['masking_policy'] -%}
-        
-          {# {% do log(column.name ~ ", has a masking policy of: " ~ column.meta['masking_policy'] ~ "_" ~ column.data_type, info=true) %} #}
-          {% set column_info = ({"COLUMN_NAME" : column.name.upper() , "POLICY_NAME" : column.meta['masking_policy'].upper()  }) %}
-          {% do column_policies.append(column_info) %}
-
-        {%- endif -%}
-
-    {%- endfor -%}
-  
-  {%- endfor -%}
 
   {# {% do log(column_policies, info=true) %} #}
 
