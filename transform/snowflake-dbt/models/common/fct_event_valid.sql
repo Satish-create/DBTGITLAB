@@ -50,7 +50,7 @@ fct_event_valid AS (
 deduped_namespace_bdg AS (
 
   SELECT
-    namespace_order_subscription.dim_subscription_id AS dim_latest_subscription_id,
+    namespace_order_subscription.dim_subscription_id AS dim_active_subscription_id,
     namespace_order_subscription.order_id,
     namespace_order_subscription.dim_crm_account_id,
     namespace_order_subscription.dim_billing_account_id,
@@ -68,7 +68,7 @@ dim_namespace_w_bdg AS (
   SELECT
     dim_namespace.dim_namespace_id,
     dim_namespace.dim_product_tier_id AS dim_active_product_tier_id,
-    deduped_namespace_bdg.dim_latest_subscription_id,
+    deduped_namespace_bdg.dim_active_subscription_id,
     deduped_namespace_bdg.order_id,
     deduped_namespace_bdg.dim_crm_account_id,
     deduped_namespace_bdg.dim_billing_account_id
@@ -78,107 +78,25 @@ dim_namespace_w_bdg AS (
 
 ),
 
-paid_flag_by_day AS (
-
-  SELECT
-    dim_ultimate_parent_namespace_id,
-    plan_was_paid_at_event_timestamp AS plan_was_paid_at_event_date,
-    plan_id_at_event_timestamp AS plan_id_at_event_date,
-    plan_name_at_event_timestamp AS plan_name_at_event_date,
-    event_created_at,
-    event_date
-  FROM fct_event_valid
-  QUALIFY ROW_NUMBER() OVER (PARTITION BY dim_ultimate_parent_namespace_id, event_date
-      ORDER BY event_created_at DESC) = 1
-
-),
-
-fct_event_w_flags AS (
+final AS (
 
   SELECT 
-    fct_event_valid.event_id,
-    fct_event_valid.dim_event_date_id,
-    fct_event_valid.dim_ultimate_parent_namespace_id,
-    fct_event_valid.dim_project_id,
-    fct_event_valid.dim_user_id,
-    fct_event_valid.event_created_at,
-    fct_event_valid.event_date,
-    fct_event_valid.group_name,
-    fct_event_valid.section_name,
-    fct_event_valid.stage_name,
-    fct_event_valid.is_smau,
-    fct_event_valid.is_gmau,
-    fct_event_valid.is_umau,
-    fct_event_valid.parent_id,
-    fct_event_valid.parent_type,
-    fct_event_valid.event_name,
-    fct_event_valid.days_since_user_creation_at_event_date,
-    fct_event_valid.days_since_namespace_creation_at_event_date,
-    fct_event_valid.days_since_project_creation_at_event_date,
-    fct_event_valid.data_source,
+    fct_event_valid.*,
     dim_namespace_w_bdg.dim_active_product_tier_id,
-    dim_namespace_w_bdg.dim_latest_subscription_id,
+    dim_namespace_w_bdg.dim_active_subscription_id,
     dim_namespace_w_bdg.order_id,
     dim_namespace_w_bdg.dim_crm_account_id,
-    dim_namespace_w_bdg.dim_billing_account_id,
-    COALESCE(paid_flag_by_day.plan_was_paid_at_event_date, FALSE) AS plan_was_paid_at_event_date,
-    COALESCE(paid_flag_by_day.plan_id_at_event_date, 34) AS plan_id_at_event_date,
-    COALESCE(paid_flag_by_day.plan_name_at_event_date, 'free') AS plan_name_at_event_date
+    dim_namespace_w_bdg.dim_billing_account_id
   FROM fct_event_valid
   LEFT JOIN dim_namespace_w_bdg
     ON fct_event_valid.dim_ultimate_parent_namespace_id = dim_namespace_w_bdg.dim_namespace_id
-  LEFT JOIN paid_flag_by_day
-    ON fct_event_valid.dim_ultimate_parent_namespace_id = paid_flag_by_day.dim_ultimate_parent_namespace_id
-      AND fct_event_valid.event_date = paid_flag_by_day.event_date
-
-),
-
-gitlab_dotcom_fact AS (
-
-  SELECT
-    --Primary Key
-    event_id,
-    
-    --Foreign Keys
-    dim_event_date_id,
-    dim_ultimate_parent_namespace_id,
-    dim_project_id,
-    dim_user_id,
-    dim_active_product_tier_id,
-    dim_latest_subscription_id,
-    dim_crm_account_id,
-    dim_billing_account_id,
-    order_id,
-    
-    --Time attributes
-    event_created_at,
-    event_date,
-    
-    --Degenerate Dimensions (No stand-alone, promoted dimension table)
-    group_name,
-    section_name,
-    stage_name,
-    is_smau,
-    is_gmau,
-    is_umau,
-    parent_id,
-    parent_type,
-    event_name,
-    plan_id_at_event_date,
-    plan_name_at_event_date,
-    plan_was_paid_at_event_date,
-    days_since_user_creation_at_event_date,
-    days_since_namespace_creation_at_event_date,
-    days_since_project_creation_at_event_date,
-    data_source
-  FROM fct_event_w_flags
 
 )
 
 {{ dbt_audit(
-    cte_ref="gitlab_dotcom_fact",
+    cte_ref="final",
     created_by="@iweeks",
     updated_by="@iweeks",
     created_date="2022-04-09",
-    updated_date="2022-06-13"
+    updated_date="2022-05-18"
 ) }}

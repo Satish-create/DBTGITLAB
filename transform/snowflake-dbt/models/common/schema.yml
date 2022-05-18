@@ -2434,6 +2434,7 @@ models:
         tests:
           - not_null
           - unique
+<<<<<<< HEAD
       - name: dim_event_date_id
         description: '{{ doc("dim_event_date_id") }}'
       - name: dim_ultimate_parent_namespace_id
@@ -2506,6 +2507,26 @@ models:
         description: '{{ doc("model_created_date") }}'
       - name: model_updated_date
         description: '{{ doc("model_updated_date") }}'
+=======
+      # - name: group_name
+        # tests:
+          # - not_null
+      - name: section_name
+        tests:
+          - not_null
+      - name: stage_name
+        tests:
+          - not_null
+      - name: is_smau
+        tests:
+          - not_null
+      - name: is_gmau
+        tests:
+          - not_null
+      - name: is_umau
+        tests:
+          - not_null
+>>>>>>> 59c363352 (convert to incremental)
   
   - name: fct_event
     description: '{{ doc("fct_event") }}'
