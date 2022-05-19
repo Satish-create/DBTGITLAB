@@ -42,7 +42,7 @@ final AS (
 
   {% if is_incremental() %}
                 
-    AND fct_ping_instance_metric.ping_created_at >= (SELECT MAX(ping_created_at) FROM {{this}})
+    AND ping_created_at >= (SELECT MAX(ping_created_at) FROM {{this}})
     
   {% endif %}
 
@@ -51,7 +51,7 @@ final AS (
 {{ dbt_audit(
     cte_ref="final",
     created_by="@icooper-acp",
-    updated_by="@snalamaru",
+    updated_by="@iweeks",
     created_date="2022-05-09",
-    updated_date="2022-05-19"
+    updated_date="2022-05-12"
 ) }}
