@@ -81,7 +81,7 @@ models:
     - name: model_updated_date
       description: The date at which the model code was last updated
 
-  - name: rpt_ping_instance_metric_adoption_monthly_all
+- name: rpt_ping_instance_metric_adoption_monthly_all
     description: ' {{ doc("rpt_ping_instance_metric_adoption_monthly_all") }} '
     columns:
       - name: rpt_ping_instance_metric_adoption_monthly_all_id
@@ -209,3 +209,4 @@ models:
         tests:
           - not_null
           - unique
+  
