@@ -42,7 +42,7 @@ This includes the following statistics:
 {% enddocs %}
 
 
-% docs rpt_ping_instance_active_subscriptions %}
+{% docs rpt_ping_instance_active_subscriptions %}
 
 Model used to determine active subscriptions.
 

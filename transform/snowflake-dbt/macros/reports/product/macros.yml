@@ -5,20 +5,20 @@ macros:
     description: '{{ doc("pct_w_counters") }}'
     arguments:
       - name: reporting_count
-        type: 
-        description: 
+        type: string
+        description: placeholder
       - name: no_reporting_count
-        type: 
-        description: 
+        type: string
+        description: placeholder
 
   - name: usage_estimation
     description: '{{ doc("usage_estimation") }}'
     arguments:
       - name: reporting_metric_count
-        type: 
-        description: 
+        type: string
+        description: placeholder
       - name: percent_reporting
-        type: 
-        description: 
+        type: string
+        description: placeholder
  
  
