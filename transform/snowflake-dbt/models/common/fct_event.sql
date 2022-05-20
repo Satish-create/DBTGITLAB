@@ -5,10 +5,22 @@
 ) }}
 
 {{ simple_cte([
-    ('dim_date', 'dim_date'),
-    ('prep_event_all', 'prep_event_all')
+    ('dim_date', 'dim_date')
     ])
 }},
+
+prep_event_all AS (
+    
+    SELECT *
+    FROM {{ ref('prep_event_all') }}
+    
+    {% if is_incremental() %}
+
+      WHERE event_created_at > (SELECT max(event_created_at) FROM {{ this }})
+
+    {% endif %}
+
+),
 
 fct_events AS (
 
@@ -27,13 +39,6 @@ fct_events AS (
     CAST(prep_event_all.event_created_at AS DATE) AS event_date
   FROM prep_event_all
   
-  {% if is_incremental() %}
-
-   WHERE event_created_at > (SELECT max(event_created_at) FROM {{ this }})
-
-  {% endif %}
-
-
 ),
 
 paid_flag_by_day AS (
@@ -103,5 +108,5 @@ gitlab_dotcom_fact AS (
     created_by="@icooper-acp",
     updated_by="@iweeks",
     created_date="2022-01-20",
-    updated_date="2022-05-18"
+    updated_date="2022-05-20"
 ) }}
