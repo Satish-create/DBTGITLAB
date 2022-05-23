@@ -782,7 +782,13 @@ models:
           - not_null
       - name: created_at
       - name: updated_at
-
+  - name: gitlab_dotcom_ip_restrictions_source
+    columns:
+      - name: ip_restrictions_id
+        tags: ["tdf","gitlab_dotcom"]
+        tests:
+          - not_null
+          - unique
   - name: gitlab_dotcom_in_product_marketing_emails_source
     description: >-
       Base model for Gitlab.com in_product_marketing emails table
