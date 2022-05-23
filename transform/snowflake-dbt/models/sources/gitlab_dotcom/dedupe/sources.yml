@@ -188,6 +188,8 @@ sources:
         identifier: gitlab_db_identities
       - name: in_product_marketing_emails
         identifier: gitlab_db_in_product_marketing_emails
+      - name: ip_restrictions
+        identifier: gitlab_db_ip_restrictions
       - name: issuable_severities
         identifier: gitlab_db_issuable_severities
       - name: issue_assignees
