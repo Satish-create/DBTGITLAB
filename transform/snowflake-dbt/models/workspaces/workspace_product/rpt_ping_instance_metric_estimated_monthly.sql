@@ -62,6 +62,7 @@
       'SaaS'    AS estimation_grain
     FROM fact
   WHERE ping_delivery_type = 'SaaS'
+  AND dim_installation_id = '8b52effca410f0a380b0fcffaa1260e7' -- We only want to pull in the gitlab.com production installation
 
 -- Union SaaS and Self Managed tables
 
