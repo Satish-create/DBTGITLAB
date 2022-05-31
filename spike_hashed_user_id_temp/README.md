@@ -7,12 +7,12 @@
 ## Java UDF function:
 * Drop it
 ```snowflake
-DROP FUNCTION IF EXISTS pseudonymize_attribute(string);
+DROP FUNCTION IF EXISTS {database_name}.{schema_name}.pseudonymize_attribute(string);
 REMOVE '@~/PseudynymizeAttributeFunc.jar';
 ```
 * Create it
 ```java
-create or replace function pseudonymize_attribute(attribute string)
+create or replace function {database_name}.{schema_name}.pseudonymize_attribute(attribute string)
 returns string
 language java
 handler='PseudynymizeAttributeFunc.exec'
@@ -45,9 +45,9 @@ class PseudynymizeAttributeFunc {
     }
 $$;
 ```
-* Call it
+* Call it to check does it work as expected:
 ```snowflake
-select pseudonymize_attribute('hello world')
+select {database_name}.{schema_name}.pseudonymize_attribute('hello world')
 ```
 
 # The experiment
@@ -56,7 +56,7 @@ select pseudonymize_attribute('hello world')
 
 ### Steps to reproduce 
 
-* Run pipeline ❄️Snowflake -> 🥩⚙clone_raw_specific_schema with parameter(s):
+* Run pipeline `❄️Snowflake -> 🥩⚙clone_raw_specific_schema` with parameter(s):
     * `SCHEMA_NAME` = `TAP_POSTGRES` 
 
 * Crate test schema under test database:
@@ -72,7 +72,7 @@ GRANT CREATE TABLE, usage ON schema {schema_name}.HASHED_USER_ID_TEST_TABLES to 
 
 * Create `CLONED` table:
 ```snowflake
-CREATE TABLE {schema_name}.HASHED_USER_ID_TEST_TABLES.GITLAB_DB_MERGE_REQUREST CLONE {schema_name}.TAP_POSTGRES.GITLAB_DB_MERGE_REQUESTS;
+`CREATE TABLE {schema_name}.HASHED_USER_ID_TEST_TABLES.GITLAB_DB_MERGE_REQUESTS CLONE {schema_name}.TAP_POSTGRES.GITLAB_DB_MERGE_REQUESTS;`
 ```
 
 * Mask data using `Java UDF function`:
@@ -85,7 +85,7 @@ CREATE TABLE {schema_name}.HASHED_USER_ID_TEST_TABLES.GITLAB_DB_MERGE_REQUREST C
 
 ### Steps to reproduce
 
-* Run pipeline ❄️Snowflake -> 🥩⚙clone_raw_specific_schema with parameter(s):
+* Run pipeline `❄️Snowflake -> 🥩⚙clone_raw_specific_schema` with parameter(s):
     * `SCHEMA_NAME` = `TAP_POSTGRES` 
 
 * Crate test schema under test database:
@@ -102,15 +102,71 @@ GRANT CREATE TABLE, usage ON schema {schema_name}.HASHED_USER_ID_TEST_VIEWS to E
 ## 3. ↩️ DBT
 
 ### Steps to reproduce
+
+* Run pipeline `❄️Snowflake -> 🥩⚙clone_raw_specific_schema` with parameter(s):
+    * `SCHEMA_NAME` = `TAP_POSTGRES` 
+
+* Crate test schema under test database:
+
+```snowflake
+CREATE SCHEMA {schema_name}.HASHED_USER_ID_TEST_DBT;
+
+GRANT CREATE TABLE, usage ON schema {schema_name}.HASHED_USER_ID_TEST_DBT to LOADER;
+GRANT CREATE TABLE, usage ON schema {schema_name}.HASHED_USER_ID_TEST_DBT to TRANSFORMER;
+GRANT CREATE TABLE, usage ON schema {schema_name}.HASHED_USER_ID_TEST_DBT to ENGINEER;
+```
+
 ### Workflow
 
-## 4.1. ❄️ Snowflake data anonymization using Snowflake
+* Create `CLONED` table:
+```snowflake
+CREATE TABLE {schema_name}.HASHED_USER_ID_TEST_DBT.GITLAB_DB_MERGE_REQUESTS CLONE {schema_name}.TAP_POSTGRES.GITLAB_DB_MERGE_REQUESTS;
+```
+
+
+## 4.1. ❄️ Snowflake data pseudonymization using Snowflake
 
 ### Steps to reproduce
+
+* Run pipeline `❄️Snowflake -> 🥩⚙clone_raw_specific_schema` with parameter(s):
+    * `SCHEMA_NAME` = `TAP_POSTGRES` 
+
+* Crate test schema under test database:
+
+```snowflake
+CREATE SCHEMA {schema_name}.HASHED_USER_ID_TEST_PSEUDONYMIZATION;
+
+GRANT CREATE TABLE, usage ON schema {schema_name}.HASHED_USER_ID_TEST_PSEUDONYMIZATION to LOADER;
+GRANT CREATE TABLE, usage ON schema {schema_name}.HASHED_USER_ID_TEST_PSEUDONYMIZATION to TRANSFORMER;
+GRANT CREATE TABLE, usage ON schema {schema_name}.HASHED_USER_ID_TEST_PSEUDONYMIZATION to ENGINEER;
+```
+
 ### Workflow
 
-## 4.2. ❄️ + ↩️ Snowflake data anonymization using DBT
+* Create `CLONED` table:
+```snowflake
+CREATE TABLE {schema_name}.HASHED_USER_ID_TEST_PSEUDONYMIZATION.GITLAB_DB_MERGE_REQUESTS CLONE {schema_name}.TAP_POSTGRES.GITLAB_DB_MERGE_REQUESTS;
+```
 
-### Steps to reproduce
+
+## 4.2. ❄️ + ↩️ Snowflake data pseudonymization using DBT
+
+* Run pipeline `❄️Snowflake -> 🥩⚙clone_raw_specific_schema` with parameter(s):
+    * `SCHEMA_NAME` = `TAP_POSTGRES` 
+
+* Crate test schema under test database:
+
+```snowflake
+CREATE SCHEMA {schema_name}.HASHED_USER_ID_TEST_PSEUDONYMIZATION_DBT;
+
+GRANT CREATE TABLE, usage ON schema {schema_name}.HASHED_USER_ID_TEST_PSEUDONYMIZATION_DBT to LOADER;
+GRANT CREATE TABLE, usage ON schema {schema_name}.HASHED_USER_ID_TEST_PSEUDONYMIZATION_DBT to TRANSFORMER;
+GRANT CREATE TABLE, usage ON schema {schema_name}.HASHED_USER_ID_TEST_PSEUDONYMIZATION_DBT to ENGINEER;
+```
+
 ### Workflow
 
+* Create `CLONED` table:
+```snowflake
+CREATE TABLE {schema_name}.HASHED_USER_ID_TEST_PSEUDONYMIZATION_DBT.GITLAB_DB_MERGE_REQUESTS CLONE {schema_name}.TAP_POSTGRES.GITLAB_DB_MERGE_REQUESTS;
+```
