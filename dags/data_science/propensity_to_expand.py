@@ -40,7 +40,7 @@ default_args = {
 
 # Create the DAG
 dag = DAG(
-    "propensity_to_expand", default_args=default_args, schedule_interval="0 12 10 * *"
+    "propensity_to_expand", default_args=default_args, schedule_interval="0 12 9 * *"
 )
 
 # Task 1
