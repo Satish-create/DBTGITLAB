@@ -54,6 +54,10 @@ select {database_name}.{schema_name}.pseudonymize_attribute('hello world')
 
 ## 1. 🪟 Table implementation (CLONE)
 
+For the sake of checking performance as the biggest concert for this approach (as the table we check is fairly huge) uses 2 approaches for this option:
+* `INSERT` + `UPDATE` - inserting data as it is and later on update columns marked for pseudonymization using `UDF`
+* `CTAS` - create a table with pseudonymization on the fly during the table creation 
+
 ### Steps to reproduce 
 
 * Run pipeline `❄️Snowflake -> 🥩⚙clone_raw_specific_schema` with parameter(s):
@@ -170,3 +174,11 @@ GRANT CREATE TABLE, usage ON schema {schema_name}.HASHED_USER_ID_TEST_PSEUDONYMI
 ```snowflake
 CREATE TABLE {schema_name}.HASHED_USER_ID_TEST_PSEUDONYMIZATION_DBT.GITLAB_DB_MERGE_REQUESTS CLONE {schema_name}.TAP_POSTGRES.GITLAB_DB_MERGE_REQUESTS;
 ```
+
+| Line| Approach | Costs | Data hashing | `PII` data masking | Data de-anonymization concerns | Efforts needed for the implementation | Efforts needed for the maintenance | Complexity | Scalability | Performance | Summary |
+| ------| ------ |------| ------ |------| ------ |------| ------ |------| ------ |------| ----- | 
+| 1. | 🪟 `Table implementation (CLONE)` | | | | | | | | | | |
+| 2. | 📝 `Views implementation` | | | | | | | | | | |
+| 3. | ↩️ `DBT` | | | | | | | | | | |
+| 4.1 | ❄️ `Snowflake data pseudonymization` using Snowflake | | | | | | | | | | |
+| 4.2 | ❄️ + ↩️ `Snowflake data pseudonymization` using `DBT` | | | | | | | | | | |
