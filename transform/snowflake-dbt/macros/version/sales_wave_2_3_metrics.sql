@@ -3,7 +3,7 @@
     -- usage ping data - devops metrics (wave 2 & 3.0)
     {{ null_negative_numbers("raw_usage_data_payload['usage_activity_by_stage_monthly']['manage']['events']") }}                                        AS umau_28_days_user,
     {{ null_negative_numbers("raw_usage_data_payload['usage_activity_by_stage_monthly']['create']['action_monthly_active_users_project_repo']") }}      AS action_monthly_active_users_project_repo_28_days_user,
-    {{ null_negative_numbers("raw_usage_data_payload['usage_activity_by_stage_monthly']['create']['merge_requests']") }}                                AS merge_requests_28_days_user,
+    {{ null_negative_numbers("raw_usage_data_payload['usage_activity_by_stage_monthly']['create']['merge_requests_users']") }}                          AS merge_requests_28_days_user,
     {{ null_negative_numbers("raw_usage_data_payload['usage_activity_by_stage_monthly']['create']['projects_with_repositories_enabled']") }}            AS projects_with_repositories_enabled_28_days_user,
     {{ null_negative_numbers("raw_usage_data_payload['counts']['commit_comment']") }}                                                                   AS commit_comment_all_time_event,
     {{ null_negative_numbers("raw_usage_data_payload['counts']['source_code_pushes']") }}                                                               AS source_code_pushes_all_time_event,
