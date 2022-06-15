@@ -6,13 +6,13 @@ WITH recruiting_expenses AS (
   
     SELECT 
       accounting_period,
-      SUM(IFF(department_name = 'Recruiting', actual_amount, 0))            AS recruiting_department,
+      SUM(IFF(department_name = 'Talent Acquisition', actual_amount, 0))            AS recruiting_department,
       SUM(IFF(account_number = 6055, actual_amount, 0))                     AS recruiting_fees,
-      SUM(IFF(department_name = 'Recruiting' 
+      SUM(IFF(department_name = 'Talent Acquisition' 
               AND account_number != 6055 
-              AND account_number != 6075, actual_amount, 0))                AS recruiting_department_minus_overlap,
+              AND account_number != 6011.1, actual_amount, 0))                AS recruiting_department_minus_overlap,
       SUM(IFF(LOWER(transaction_lines_memo) = 'referral bonus'
-              OR account_number = 6075, actual_amount, 0))                  AS referral_fees,
+              OR account_number = 6011.1, actual_amount, 0))                  AS referral_fees,
       recruiting_department_minus_overlap + recruiting_fees + referral_fees AS total_expenses
     FROM {{ ref ('netsuite_actuals_income_cogs_opex') }}
     GROUP BY 1
