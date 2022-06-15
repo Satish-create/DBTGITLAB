@@ -61,7 +61,7 @@
       -- Wave 2 & 3
       "usage_activity_by_stage_monthly.manage.events"                                           AS umau_28_days_user,
       "usage_activity_by_stage_monthly.create.action_monthly_active_users_project_repo"         AS action_monthly_active_users_project_repo_28_days_user,
-      "usage_activity_by_stage_monthly.create.merge_requests"                                   AS merge_requests_28_days_user,
+      "usage_activity_by_stage_monthly.create.merge_requests_users"                             AS merge_requests_28_days_user,
       "usage_activity_by_stage_monthly.create.projects_with_repositories_enabled"               AS projects_with_repositories_enabled_28_days_user,
       "counts.commit_comment"                                                                   AS commit_comment_all_time_event,
       "counts.source_code_pushes"                                                               AS source_code_pushes_all_time_event,
