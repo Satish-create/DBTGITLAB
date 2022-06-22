@@ -377,9 +377,11 @@ def drive_loader(
         folder_id = google_drive_client.get_item_id(
             item_name=folder_name, is_folder=True
         )
+
         archive_folder_id = google_drive_client.get_archive_folder_id(
             in_folder_id=folder_id
         )
+        info(f"Found archive folder {archive_folder_id}")
 
         files = google_drive_client.get_files_in_folder(
             folder_id=folder_id, file_type="text/csv"
