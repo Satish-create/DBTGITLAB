@@ -106,7 +106,9 @@ sources:
       - name: territory_mapping
       - name: scalable_employment_values
       - name: sdr_adaptive_data
-      - name: sdr_attainment_to_goal
+      # This sheetload has been made silenced as part of this issue 
+      # https://gitlab.com/gitlab-data/analytics/-/issues/13098
+      #- name: sdr_attainment_to_goal
       - name: sdr_count_snapshot
       - name: sisense_users
       - name: sisense_user_roles
