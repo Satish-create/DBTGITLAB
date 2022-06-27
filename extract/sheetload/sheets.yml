@@ -266,10 +266,12 @@ sheets:
     owner: '@rkohnke'
     tabs:
       - sdr_adaptive_data
-  - name: sdr_attainment_to_goal
-    owner: '@rkohnke'
-    tabs:
-      - sdr_attainment_to_goal
+# This sheetload has been made silenced as part of this issue 
+# https://gitlab.com/gitlab-data/analytics/-/issues/13098
+#  - name: sdr_attainment_to_goal
+#    owner: '@rkohnke'
+#    tabs:
+#      - sdr_attainment_to_goal
   - name: sdr_count_snapshot
     owner: '@vikijuhasz'
     tabs:
