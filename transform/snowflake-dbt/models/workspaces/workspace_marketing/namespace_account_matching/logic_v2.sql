@@ -66,7 +66,7 @@ mart_arr AS (
     GROUP BY 1, 2
   ),
 
-salseforce_company_id AS (
+salesforce_company_id AS (
     SELECT
       crm_accounts.dim_crm_account_id,
       crm_accounts.dim_parent_crm_account_id,
@@ -107,8 +107,8 @@ account_email_domain AS (
       marketing_contacts.company_name,
       marketing_contacts.dim_crm_account_id,
       crm_accounts.dim_parent_crm_account_id,
-      IFF(account_email_domain.business_email = 1, salseforce_company_id.dim_crm_account_id, NULL) AS account_id, -- to reduce mapping to wrong account. reduces error rate from 10% to 5% and eliminated 20% of users having account_id
-      IFF(account_email_domain.business_email = 1, salseforce_company_id.dim_parent_crm_account_id, NULL) AS parent_account_id,
+      IFF(account_email_domain.business_email = 1, salesforce_company_id.dim_crm_account_id, NULL) AS account_id, -- to reduce mapping to wrong account. reduces error rate from 10% to 5% and eliminated 20% of users having account_id
+      IFF(account_email_domain.business_email = 1, salesforce_company_id.dim_parent_crm_account_id, NULL) AS parent_account_id,
       CASE
         WHEN marketing_contacts.dim_crm_account_id = account_id AND account_id IS NOT NULL THEN 1
         ELSE 0
@@ -122,11 +122,11 @@ account_email_domain AS (
     LEFT JOIN user_company_bridge
       ON users.dim_user_id = user_company_bridge.gitlab_dotcom_user_id -- only pulls the product user, because we join to dim_user
 
-    LEFT JOIN salseforce_company_id
-      ON salseforce_company_id.company_id = user_company_bridge.company_id
+    LEFT JOIN salesforce_company_id
+      ON salesforce_company_id.company_id = user_company_bridge.company_id
       --left join doc_zid d2 on d2.company_id = c.company_id
     LEFT JOIN account_email_domain
-      ON account_email_domain.dim_crm_account_id = salseforce_company_id.dim_crm_account_id
+      ON account_email_domain.dim_crm_account_id = salesforce_company_id.dim_crm_account_id
            AND users.email_domain = account_email_domain.email_domain
            AND account_email_domain.rn < 4
            AND account_email_domain.business_email = 1
@@ -152,10 +152,10 @@ mrr_namespaces AS (
     SELECT
       namespace_subscription.namespace_id,
       namespace_type,
-      salseforce_company_id.dim_parent_crm_account_id,
-      salseforce_company_id.dim_crm_account_id,
-      salseforce_company_id.company_id,
-      salseforce_company_id.source_company_id,
+      salesforce_company_id.dim_parent_crm_account_id,
+      salesforce_company_id.dim_crm_account_id,
+      salesforce_company_id.company_id,
+      salesforce_company_id.source_company_id,
       MAX(arr_month) AS max_arr_month,
       ROW_NUMBER() OVER (PARTITION BY namespace_subscription.namespace_id ORDER BY max_arr_month DESC) AS rn
     FROM namespace_subscription
@@ -163,8 +163,8 @@ mrr_namespaces AS (
       ON namespace_subscription.subscription_name_slugify = mart_arr.subscription_name_slugify AND mart_arr.product_delivery_type = 'SaaS'
       -- and m.product_rate_plan_name != 'Gitlab Storage 10GB'
       AND arr_month < getdate()::DATE
-    LEFT JOIN salseforce_company_id
-      ON salseforce_company_id.dim_crm_account_id = mart_arr.dim_crm_account_id
+    LEFT JOIN salesforce_company_id
+      ON salesforce_company_id.dim_crm_account_id = mart_arr.dim_crm_account_id
     GROUP BY 1, 2, 3, 4, 5, 6
   ),
 
@@ -272,11 +272,11 @@ company_email_domain AS (
 
 user_company AS (
     SELECT DISTINCT
-      user_id,
-      email_domain,
-      email_domain_classification,
-      source_company_id,
-      IFF(edom.rn IS NOT NULL, 1, 0) AS top_company_emaildom -- to reduce mapping error .
+      user_company_bridge.gitlab_dotcom_user_id as user_id,
+      users.email_domain,
+      users.email_domain_classification,
+      companies.source_company_id,
+      IFF(company_email_domain.rn IS NOT NULL, 1, 0) AS top_company_emaildom -- to reduce mapping error .
 
 FROM user_company_bridge
     INNER JOIN users
@@ -361,14 +361,14 @@ namespace_company AS (
 company_ids AS (
     SELECT
       source_company_id,
-      MAX(salseforce_company_id.dim_crm_account_id) AS account_id,
-      MAX(salseforce_company_id.dim_parent_crm_account_id) AS parent_account_id,
-      COUNT(DISTINCT salseforce_company_id.dim_crm_account_id) AS no_a,
-      COUNT(DISTINCT salseforce_company_id.dim_parent_crm_account_id) AS no_upa,
-      ARRAY_TO_STRING(arrayagg(DISTINCT concat(salseforce_company_id.DIM_CRM_ACCOUNT_ID,':',salseforce_company_id.CRM_ACCOUNT_NAME) ), ',') AS list_of_accounts,
-      ARRAY_TO_STRING(arrayagg(DISTINCT concat(salseforce_company_id.DIM_parent_CRM_ACCOUNT_ID,':',salseforce_company_id.parent_CRM_ACCOUNT_NAME) ), ',') AS list_of_upa
+      MAX(salesforce_company_id.dim_crm_account_id) AS account_id,
+      MAX(salesforce_company_id.dim_parent_crm_account_id) AS parent_account_id,
+      COUNT(DISTINCT salesforce_company_id.dim_crm_account_id) AS no_a,
+      COUNT(DISTINCT salesforce_company_id.dim_parent_crm_account_id) AS no_upa,
+      ARRAY_TO_STRING(arrayagg(DISTINCT concat(salesforce_company_id.DIM_CRM_ACCOUNT_ID,':',salesforce_company_id.CRM_ACCOUNT_NAME) ), ',') AS list_of_accounts,
+      ARRAY_TO_STRING(arrayagg(DISTINCT concat(salesforce_company_id.DIM_parent_CRM_ACCOUNT_ID,':',salesforce_company_id.parent_CRM_ACCOUNT_NAME) ), ',') AS list_of_upa
       -- , max(account_type_num ) as paid_status_num
-    FROM salseforce_company_id
+    FROM salesforce_company_id
       --left join account_type a on a.DIM_CRM_ACCOUNT_ID = s.DIM_CRM_ACCOUNT_ID
     GROUP BY 1
   ),
@@ -438,38 +438,38 @@ namespace_most_matched_account AS (
     SELECT
       namespace_map.namespace_id,
       most_matched_namespace_account.account_id,
-      MAX(IFF(salseforce_company_id.dim_crm_account_id IS NOT NULL, 1, 0)) AS mma_account_id_in_sfzid
+      MAX(IFF(salesforce_company_id.dim_crm_account_id IS NOT NULL, 1, 0)) AS mma_account_id_in_sfzid
     FROM namespace_map
 -- based on the highest match count account
     INNER JOIN most_matched_namespace_account
       ON most_matched_namespace_account.namespace_id = namespace_map.namespace_id -- namespace level: most matched accounts by the users of the namespace
-    LEFT JOIN salseforce_company_id
-      ON salseforce_company_id.source_company_id = namespace_map.predicted_company_id AND salseforce_company_id.dim_crm_account_id = most_matched_namespace_account.account_id -- account level
+    LEFT JOIN salesforce_company_id
+      ON salesforce_company_id.source_company_id = namespace_map.predicted_company_id AND salesforce_company_id.dim_crm_account_id = most_matched_namespace_account.account_id -- account level
     WHERE namespace_map.predicted_company_id IS NOT NULL
     GROUP BY 1, 2
   ),
 
-namesapce_email_domain_account AS (
+namespace_email_domain_account AS (
     SELECT
       namespace_map.namespace_id,
       account_email_domain.dim_crm_account_id AS account_id,
       account_email_domain.ratio_of_users,
-      IFF(salseforce_company_id.source_company_id IS NOT NULL, 1, 0) AS edom_account_id_in_sfzid,
+      IFF(salesforce_company_id.source_company_id IS NOT NULL, 1, 0) AS edom_account_id_in_sfzid,
       ROW_NUMBER() OVER (PARTITION BY namespace_map.namespace_id ORDER BY edom_account_id_in_sfzid DESC , account_email_domain.ratio_of_users DESC ) AS rn
     FROM namespace_map
     INNER JOIN namespace_email_domain
       ON namespace_email_domain.namespace_id = namespace_map.namespace_id AND namespace_email_domain.row_number = 1
     INNER JOIN account_email_domain
       ON account_email_domain.rn = 1 AND account_email_domain.business_email = 1 AND account_email_domain.email_domain = namespace_email_domain.email_domain
-    LEFT JOIN salseforce_company_id
-      ON salseforce_company_id.source_company_id = namespace_map.predicted_company_id AND account_email_domain.dim_crm_account_id = salseforce_company_id.dim_crm_account_id
+    LEFT JOIN salesforce_company_id
+      ON salesforce_company_id.source_company_id = namespace_map.predicted_company_id AND account_email_domain.dim_crm_account_id = salesforce_company_id.dim_crm_account_id
     WHERE namespace_map.predicted_company_id IS NOT NULL
   ),
 
 namespace_map_details AS (
     SELECT
       namespace_map.*,
-      COALESCE(IFF(company_ids.no_a = 1, company_ids.account_id, NULL), namespace_most_matched_account.account_id, namesapce_email_domain_account.account_id) AS zi_linked_account,
+      COALESCE(IFF(company_ids.no_a = 1, company_ids.account_id, NULL), namespace_most_matched_account.account_id, namespace_email_domain_account.account_id) AS zi_linked_account,
       COALESCE(namespace_map.account_id, zi_linked_account) AS combined_account_id,
       CASE
         WHEN namespace_map.actual_account_id IS NOT NULL THEN 'actual_account'
@@ -486,8 +486,8 @@ namespace_map_details AS (
     FROM namespace_map
     LEFT JOIN namespace_most_matched_account
       ON namespace_most_matched_account.namespace_id = namespace_map.namespace_id AND namespace_most_matched_account.mma_account_id_in_sfzid = 1
-    LEFT JOIN namesapce_email_domain_account
-      ON namesapce_email_domain_account.namespace_id = namespace_map.namespace_id AND namesapce_email_domain_account.rn = 1 AND namesapce_email_domain_account.edom_account_id_in_sfzid = 1
+    LEFT JOIN namespace_email_domain_account
+      ON namespace_email_domain_account.namespace_id = namespace_map.namespace_id AND namespace_email_domain_account.rn = 1 AND namespace_email_domain_account.edom_account_id_in_sfzid = 1
     LEFT JOIN company_ids
       ON company_ids.source_company_id = namespace_map.company_id -- identified company
 )
