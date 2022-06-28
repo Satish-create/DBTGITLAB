@@ -1,0 +1,1 @@
+{{ delete_tables(schema=['workday'], mode='outdated') }}
