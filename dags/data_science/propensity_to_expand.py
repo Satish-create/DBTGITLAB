@@ -4,7 +4,7 @@ from datetime import datetime, timedelta
 from airflow import DAG
 from airflow.contrib.operators.kubernetes_pod_operator import KubernetesPodOperator
 from airflow_utils import (
-    DATA_SCIENCE_IMAGE,
+    ANALYST_IMAGE,
     gitlab_defaults,
     gitlab_pod_env_vars,
     slack_failed_task,
@@ -51,7 +51,7 @@ pte_scoring_command = f"""
 """
 KubernetesPodOperator(
     **gitlab_defaults,
-    image=DATA_SCIENCE_IMAGE,
+    image=ANALYST_IMAGE,
     task_id="propensity-to-expand",
     name="propensity-to-expand",
     secrets=[
