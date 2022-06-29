@@ -306,8 +306,6 @@ sources:
         identifier: gitlab_db_routes
       - name: saml_providers
         identifier: gitlab_db_saml_providers
-      - name: services
-        identifier: gitlab_db_services
       - name: shards
         identifier: gitlab_db_shards
       - name: sprints

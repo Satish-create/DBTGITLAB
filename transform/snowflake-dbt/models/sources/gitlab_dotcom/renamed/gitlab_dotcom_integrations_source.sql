@@ -2,18 +2,17 @@
 WITH source AS (
 
     SELECT *
-    FROM {{ ref('gitlab_dotcom_services_dedupe_source') }}
+    FROM {{ ref('gitlab_dotcom_integrations_dedupe_source') }}
     
 ), renamed AS (
 
     SELECT
       id::NUMBER                             AS service_id,
-      type::VARCHAR                          AS service_type,
+      type_new::VARCHAR                      AS service_type,
       project_id::NUMBER                     AS project_id,
       created_at::TIMESTAMP                  AS created_at,
       updated_at::TIMESTAMP                  AS updated_at,
       active::BOOLEAN                        AS is_active,
-      properties::VARCHAR                    AS service_properties,
       template::BOOLEAN                      AS service_template,
       push_events::BOOLEAN                   AS has_push_events,
       issues_events::BOOLEAN                 AS has_issues_events,
@@ -28,7 +27,9 @@ WITH source AS (
       job_events::BOOLEAN                    AS has_job_events,
       confidential_note_events::BOOLEAN      AS has_confidential_note_events,
       deployment_events::BOOLEAN             AS has_deployment_events,
-      comment_on_event_enabled::BOOLEAN      AS is_comment_on_event_enabled
+      comment_on_event_enabled::BOOLEAN      AS is_comment_on_event_enabled,
+      group_id::NUMBER                       AS group_id,
+	  inherit_from_id::NUMBER                AS inherit_from_id
     FROM source
 
 )

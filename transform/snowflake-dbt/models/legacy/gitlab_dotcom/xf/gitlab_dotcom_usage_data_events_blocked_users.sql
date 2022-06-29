@@ -626,7 +626,7 @@ WITH gitlab_subscriptions AS (
 ), services AS (
 
     SELECT *
-    FROM {{ ref('gitlab_dotcom_services') }}
+    FROM {{ ref('gitlab_dotcom_integrations') }}
     WHERE service_type != 'GitlabIssueTrackerService'
 
 ), terraform_reports AS (
