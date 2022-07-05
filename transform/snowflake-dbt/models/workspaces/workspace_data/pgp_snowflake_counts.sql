@@ -92,16 +92,6 @@ UNION ALL
     AND date_check.table_name = 'gitlab_db_group_import_states'
     QUALIFY ROW_NUMBER() OVER (PARTITION BY group_id ORDER BY updated_date DESC) = 1
     UNION ALL
-    SELECT snowflake.project_id,
-        'gitlab_db_status_page_settings'                                                       AS table_name,
-        DATE(snowflake.created_at)                                                             AS created_date,
-        DATE(snowflake.updated_at)                                                             AS updated_date
-    FROM {{source('gitlab_dotcom','status_page_settings')}}                                    AS snowflake
-    INNER JOIN date_check
-    ON DATE(snowflake.updated_at) >= date_check.updated_date
-    AND date_check.table_name = 'gitlab_db_status_page_settings'
-    QUALIFY ROW_NUMBER() OVER (PARTITION BY project_id ORDER BY updated_date DESC) = 1
-    UNION ALL
     SELECT snowflake.user_id,
         'gitlab_db_user_preferences'                                                           AS table_name,
         DATE(snowflake.created_at)                                                             AS created_date,
