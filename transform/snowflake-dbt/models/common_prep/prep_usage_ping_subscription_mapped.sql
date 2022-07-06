@@ -12,7 +12,7 @@
 WITH usage_pings_with_license_md5 AS (
 
     SELECT *
-    FROM {{ ref('prep_usage_ping') }}
+    FROM {{ ref('prep_ping_instance') }}
     WHERE license_md5 IS NOT NULL
 
 ), map_license_subscription_account AS (
@@ -65,7 +65,7 @@ WITH usage_pings_with_license_md5 AS (
 {{ dbt_audit(
     cte_ref="final",
     created_by="@kathleentam",
-    updated_by="@chrissharp",
+    updated_by="@snalamaru",
     created_date="2021-01-10",
-    updated_date="2021-09-30"
+    updated_date="2022-07-06"
 ) }}
