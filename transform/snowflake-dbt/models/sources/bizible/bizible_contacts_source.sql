@@ -5,7 +5,7 @@ WITH source AS (
       modified_date                     AS modified_date,
       created_date                      AS created_date,
       email                             AS email,
-      accountid                         AS accountid,
+      accountid                         AS account_id,
       lead_source                       AS lead_source,
       bizible_stage                     AS bizible_stage,
       bizible_stage_previous            AS bizible_stage_previous,
