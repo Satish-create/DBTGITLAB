@@ -344,7 +344,7 @@ clone_data_science_repo_cmd = f"""
 
 
 upload_dbt_manifest_to_mcd_cmd = f"""
-    montecarlo import dbt-manifest && 
+    montecarlo import dbt-manifest 
     target/manifest.json --project-name gitlab-analytics"""
 
 # command to exclude models (for test models) in dbt test command
