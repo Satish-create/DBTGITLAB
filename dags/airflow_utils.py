@@ -12,9 +12,9 @@ from airflow.contrib.operators.slack_webhook_operator import SlackWebhookOperato
 SSH_REPO = "git@gitlab.com:gitlab-data/analytics.git"
 HTTP_REPO = "https://gitlab.com/gitlab-data/analytics.git"
 DATA_IMAGE = "registry.gitlab.com/gitlab-data/data-image/data-image:v0.0.27"
-DBT_IMAGE = "registry.gitlab.com/gitlab-data/data-image/dbt-image:v0.0.15"
+DBT_IMAGE = "registry.gitlab.com/gitlab-data/data-image/dbt-image:modify-dbt-image-for-mc"
 PERMIFROST_IMAGE = "registry.gitlab.com/gitlab-data/permifrost:v0.13.1"
-ANALYST_IMAGE = "registry.gitlab.com/gitlab-data/data-image/analyst-image:v0.0.25"
+ANALYST_IMAGE = "registry.gitlab.com/gitlab-data/data-image/analyst-image:modify-dbt-image-for-mc"
 
 DATA_SCIENCE_SSH_REPO = "git@gitlab.com:gitlab-data/data-science.git"
 DATA_SCIENCE_HTTP_REPO = "https://gitlab.com/gitlab-data/data-science.git"
@@ -341,6 +341,11 @@ clone_data_science_repo_cmd = f"""
     cd data-science &&
     git checkout $GIT_COMMIT &&
     cd .."""
+
+
+upload_dbt_manifest_to_mcd_cmd = f"""
+    montecarlo import dbt-manifest \
+    target/manifest.json --project-name gitlab-analytics"""
 
 # command to exclude models (for test models) in dbt test command
 run_command_test_exclude = "--exclude staging.gitlab_com edm_snapshot"
