@@ -5,7 +5,7 @@
 {{
     config({
         "materialized": "incremental",
-        "unique_key": "dim_usage_ping_id"
+        "unique_key": "dim_ping_instance_id"
     })
 }}
 
@@ -23,7 +23,7 @@ WITH usage_pings_with_license_md5 AS (
 ), final AS (
 
     SELECT
-      usage_pings_with_license_md5.dim_usage_ping_id,
+      usage_pings_with_license_md5.dim_ping_instance_id,
       usage_pings_with_license_md5.dim_product_tier_id,
       usage_pings_with_license_md5.ping_created_at,
       usage_pings_with_license_md5.ping_created_at_28_days_earlier,
