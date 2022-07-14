@@ -442,11 +442,26 @@ WITH sfdc_opportunity_xf AS (
       AND lower(opp_snapshot.deal_group) LIKE ANY ('%growth%', '%new%')
     GROUP BY 1
   
+), op_excl_exceeding_1m_deals_yoy AS (
+
+    SELECT
+        opp_snapshot.report_user_segment_geo_region_area_sqs_ot,
+        SUM(opp_snapshot.open_1plus_net_arr) AS minus_1_year_open_1plus_under_1m_net_arr
+    FROM sfdc_opportunity_snapshot_history_xf opp_snapshot
+      CROSS JOIN today
+    WHERE
+        opp_snapshot.snapshot_fiscal_quarter_date = DATEADD(month,-12,today.current_fiscal_quarter_date)
+        AND opp_snapshot.snapshot_day_of_fiscal_quarter_normalised = today.current_fiscal_quarter_day_normalised
+        AND opp_snapshot.is_eligible_open_pipeline_flag = 1
+        AND opp_snapshot.net_arr < 1000000
+    GROUP BY 1
+
 ), report_opportunity_metrics_qtd AS (  
 
     SELECT 
         agg.*, 
         pipe_gen_yoy.minus_1_year_pipe_gen_net_arr,
+        op_excl_exceeding_1m_deals_yoy.minus_1_year_open_1plus_under_1m_net_arr,
 
         -- standard reporting keys
         COALESCE(agg_demo_keys.key_sqs,'other')                         AS key_sqs,
@@ -480,6 +495,8 @@ WITH sfdc_opportunity_xf AS (
     -- Add keys for aggregated analysis
     LEFT JOIN pipe_gen_yoy
         ON agg.report_user_segment_geo_region_area_sqs_ot = pipe_gen_yoy.report_user_segment_geo_region_area_sqs_ot
+    LEFT JOIN op_excl_exceeding_1m_deals_yoy
+        ON agg.report_user_segment_geo_region_area_sqs_ot = op_excl_exceeding_1m_deals_yoy.report_user_segment_geo_region_area_sqs_ot
     LEFT JOIN agg_demo_keys
         ON agg.report_user_segment_geo_region_area_sqs_ot = agg_demo_keys.report_user_segment_geo_region_area_sqs_ot
   )
