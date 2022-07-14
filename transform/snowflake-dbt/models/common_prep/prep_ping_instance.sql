@@ -22,7 +22,14 @@
     FROM {{ ref('version_usage_data_source') }} as usage
 
   {% if is_incremental() %}
-          WHERE ping_created_at >= (SELECT MAX(ping_created_at) FROM {{this}})
+
+          --WHERE ping_created_at >= (SELECT MAX(ping_created_at) FROM {{this}})
+          WHERE ping_created_at >= (SELECT MAX(ping_created_at) FROM {{this}} AS usage2 WHERE usage.id = usage2.id)
+          --WHERE ping_created_at NOT EXISTS (SELECT ping_created_at 
+          --                                  FROM PROD.common_prep.prep_ping_instance_flattened AS usage2
+          --                                  WHERE usage.dim_ping_instance_id = usage2.dim_ping_instance_id
+          --                                    AND usage.dim_host_id = usage2.dim_host_id)
+
   {% endif %}
 
 ), usage_data AS (
