@@ -134,6 +134,7 @@ models:
           sensitive: true
   - name: bizible_placements_source
   - name: bizible_segments_source
+  - name: bizible_sessions_source
   - name: bizible_site_links_source
   - name: bizible_sites_source
   - name: bizible_stage_definitions_source
