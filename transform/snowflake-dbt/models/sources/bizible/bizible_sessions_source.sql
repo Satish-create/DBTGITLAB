@@ -1,7 +1,7 @@
 WITH source AS (
 
     SELECT
-      id                               AS id,
+      id                               AS session_id,
       visitor_id                       AS visitor_id,
       cookie_id                        AS cookie_id,
       event_date                       AS event_date,
@@ -70,8 +70,7 @@ WITH source AS (
       keyword_row_key                  AS keyword_row_key,
       _created_date                    AS _created_date,
       _modified_date                   AS _modified_date,
-      _deleted_date                    AS _deleted_date,
-      uploaded_at                      AS uploaded_at,
+      _deleted_date                    AS _deleted_date
     FROM {{ source('bizible', 'biz_sessions') }}
  
 )

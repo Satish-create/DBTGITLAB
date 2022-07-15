@@ -135,6 +135,16 @@ models:
   - name: bizible_placements_source
   - name: bizible_segments_source
   - name: bizible_sessions_source
+    columns:
+      - name: session_id
+        meta:
+          sensitive: true
+      - name: ip_address
+        meta:
+          sensitive: true
+      - name: isp_name
+        meta:
+          sensitive: true
   - name: bizible_site_links_source
   - name: bizible_sites_source
   - name: bizible_stage_definitions_source
