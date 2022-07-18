@@ -286,4 +286,15 @@ gitlab-org/modelops/applied-ml/review-recommender/gcp-postgres,32823351
 gitlab-org/modelops/applied-ml/review-recommender/extracteur,31202357
 gitlab-org/modelops/applied-ml/review-recommender/etl,31202862
 gitlab-org/modelops/applied-ml/review-recommender/recommender-ci,31203942
+gitlab-org/modelops/applied-ml/review-recommender/authenticator,31202639
+gitlab-org/modelops/applied-ml/review-recommender/recommender-service,31204058
+gitlab-org/modelops/applied-ml/review-recommender/ci-templates,31395420
+gitlab-org/modelops/applied-ml/review-recommender/cluster-management,32553720
+gitlab-org/modelops/applied-ml/review-recommender/pipeline-scheduler,33191677
+gitlab-org/modelops/applied-ml/review-recommender/clickhouse-exploration,36831072
+gitlab-org/modelops/applied-ml/applied-ml-updates,31194376
+gitlab-org/modelops/team-tasks,37892002
+gitlab-org/modelops/anti-abuse/team-tasks,35854345
+gitlab-org/modelops/anti-abuse/anti-abuse-updates,31918625
 gitlab-org/modelops/anti-abuse/pipeline-validation-service,24631368
+
