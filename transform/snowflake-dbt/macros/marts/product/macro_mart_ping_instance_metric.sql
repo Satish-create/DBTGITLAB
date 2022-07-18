@@ -29,9 +29,6 @@
   SELECT
     * FROM {{ ref(model_name1) }}
     WHERE IS_REAL(TO_VARIANT(metric_value))
-    {% if is_incremental() %}
-                AND ping_created_at >= (SELECT MAX(ping_created_at) FROM {{this}})
-    {% endif %}
 
 ), subscription_source AS (
 
@@ -272,13 +269,5 @@
         AND TRY_TO_DECIMAL(metric_value::TEXT) >= 0
 
 )
-
-{{ dbt_audit(
-    cte_ref="sorted",
-    created_by="@icooper-acp",
-    updated_by="@icooper-acp",
-    created_date="2022-03-11",
-    updated_date="2022-03-11"
-) }}
 
 {% endmacro %}

@@ -1,7 +1,5 @@
 {{ config(
-    tags=["product", "mnpi_exception"],
-    materialized = "incremental",
-    unique_key = "ping_instance_metric_id"
+    tags=["product", "mnpi_exception"]
 ) }}
 
 {{ simple_cte([
@@ -39,19 +37,14 @@ final AS (
     AND is_last_ping_of_month = TRUE
     AND has_timed_out = FALSE
     AND metric_value IS NOT NULL
-
-  {% if is_incremental() %}
-                
-    AND fct_ping_instance_metric.ping_created_at >= (SELECT MAX(ping_created_at) FROM {{this}})
-    
-  {% endif %}
+    AND DATE_TRUNC(MONTH, fct_ping_instance_metric.ping_created_at::DATE) >= DATEADD(MONTH, -24, DATE_TRUNC(MONTH,CURRENT_DATE)) 
 
 )
 
 {{ dbt_audit(
     cte_ref="final",
     created_by="@icooper-acp",
-    updated_by="@snalamaru",
+    updated_by="@iweeks",
     created_date="2022-05-09",
-    updated_date="2022-05-19"
+    updated_date="2022-07-18"
 ) }}
