@@ -12,7 +12,7 @@ Downstream Airflow tasks or dbt models that were skipped: <!-- None -->
 
 ## DE Triage Guidelines
 
-* See the [handbook](https://about.gitlab.com/handbook/business-technology/data-team/how-we-work/triage/#triage-common-issues) for common triage issues.
+* See the [runbook](https://gitlab.com/gitlab-data/runbooks/-/tree/main/triage_issues) for common triage issues.
 
 <details>
 <summary><b>Source freshness failures</b></summary>
