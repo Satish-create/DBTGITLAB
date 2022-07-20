@@ -1,4 +1,6 @@
 {{ config(alias='sfdc_users_xf') }}
+-- JK 2022-07-20: we should be able to replace the sources with prod.common.dim_crm_user after aligning about the comments below
+
 WITH RECURSIVE users AS (
 
     SELECT *
@@ -21,18 +23,18 @@ WITH RECURSIVE users AS (
       users.department      AS department,
       users.title           AS title,
       users.team,           --team,
-      users.user_id,        --user_id
+      users.user_id,        --user_id     -- JK 2022-07-20: dim_crm_user_id in prod.common.dim_crm_user?
       CASE --only expose GitLab.com email addresses of internal employees
-        WHEN users.user_email LIKE '%gitlab.com' THEN users.user_email 
+        WHEN users.user_email LIKE '%gitlab.com' THEN users.user_email -- JK 2022-07-20: user_email field not available in prod.common.dim_crm_user
         ELSE NULL END       AS user_email,
       manager.name          AS manager_name,
       manager.user_id       AS manager_id,
-      users.user_geo,
-      users.user_region,
-      users.user_segment,
-      users.user_area,
-      user_role.name        AS role_name,
-      users.start_date,      --start_date
+      users.user_geo, -- JK 2022-07-20: crm_user_geo in prod.common.dim_crm_user?
+      users.user_region, -- JK 2022-07-20: crm_user_region?
+      users.user_segment, -- JK 2022-07-20: crm_user_sales_segment?
+      users.user_area, --JK 2022-07-20: crm_user_area?
+      user_role.name        AS role_name,   -- JK 2022-07-20: user_role_name
+      users.start_date,      --start_date 
       users.is_active,        --is_active
       users_source.employee_number
     FROM users

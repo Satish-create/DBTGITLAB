@@ -58,54 +58,54 @@ we can delete this connection and use the mart table directly.
       sfdc_opportunity_xf.account_id,
       sfdc_opportunity_xf.opportunity_id,
       sfdc_opportunity_xf.opportunity_name,
-      sfdc_opportunity_xf.owner_id,
+      sfdc_opportunity_xf.owner_id,  -- JK 2022-07-20: the field doesn't exist in prod.restricted_safe_common_mart_sales.mart_crm_opportunity
       sfdc_opportunity_xf.close_date,
       sfdc_opportunity_xf.created_date,
-      sfdc_opportunity_xf.days_in_stage,
-      sfdc_opportunity_xf.deployment_preference,
-      sfdc_opportunity_xf.generated_source,
-      sfdc_opportunity_xf.lead_source,
-      sfdc_opportunity_xf.lead_source_id,
-      sfdc_opportunity_xf.lead_source_name,
-      sfdc_opportunity_xf.lead_source_type,
-      sfdc_opportunity_xf.merged_opportunity_id,
-      sfdc_opportunity_xf.net_new_source_categories,
+      sfdc_opportunity_xf.days_in_stage, -- JK 2022-07-20: the field doesn't exist in prod.restricted_safe_common_mart_sales.mart_crm_opportunity
+      sfdc_opportunity_xf.deployment_preference, -- JK 2022-07-20: the field doesn't exist in prod.restricted_safe_common_mart_sales.mart_crm_opportunity
+      sfdc_opportunity_xf.generated_source, -- JK 2022-07-20: the field doesn't exist in prod.restricted_safe_common_mart_sales.mart_crm_opportunity
+      sfdc_opportunity_xf.lead_source, 
+      sfdc_opportunity_xf.lead_source_id, -- JK 2022-07-20: the field doesn't exist in prod.restricted_safe_common_mart_sales.mart_crm_opportunity
+      sfdc_opportunity_xf.lead_source_name, -- JK 2022-07-20: the field doesn't exist in prod.restricted_safe_common_mart_sales.mart_crm_opportunity
+      sfdc_opportunity_xf.lead_source_type, -- JK 2022-07-20: the field doesn't exist in prod.restricted_safe_common_mart_sales.mart_crm_opportunity
+      sfdc_opportunity_xf.merged_opportunity_id, -- JK 2022-07-20: the field doesn't exist in prod.restricted_safe_common_mart_sales.mart_crm_opportunity
+      sfdc_opportunity_xf.net_new_source_categories, -- JK 2022-07-20: the field doesn't exist in prod.restricted_safe_common_mart_sales.mart_crm_opportunity
       sfdc_opportunity_xf.opportunity_business_development_representative,
       opportunity_owner.name                            AS opportunity_owner,
-      sfdc_opportunity_xf.opportunity_owner_department,
-      sfdc_opportunity_xf.opportunity_owner_manager,
-      sfdc_opportunity_xf.opportunity_owner_role,
-      sfdc_opportunity_xf.opportunity_owner_title,
+      sfdc_opportunity_xf.opportunity_owner_department, -- JK 2022-07-20: the field doesn't exist in prod.restricted_safe_common_mart_sales.mart_crm_opportunity
+      sfdc_opportunity_xf.opportunity_owner_manager, -- JK 2022-07-20: the field doesn't exist in prod.restricted_safe_common_mart_sales.mart_crm_opportunity
+      sfdc_opportunity_xf.opportunity_owner_role, -- JK 2022-07-20: the field doesn't exist in prod.restricted_safe_common_mart_sales.mart_crm_opportunity
+      sfdc_opportunity_xf.opportunity_owner_title, -- JK 2022-07-20: the field doesn't exist in prod.restricted_safe_common_mart_sales.mart_crm_opportunity
       sfdc_opportunity_xf.opportunity_sales_development_representative,
       sfdc_opportunity_xf.opportunity_development_representative,
-      sfdc_opportunity_xf.opportunity_term,
+      sfdc_opportunity_xf.opportunity_term, -- JK 2022-07-20: the field doesn't exist in prod.restricted_safe_common_mart_sales.mart_crm_opportunity
       sfdc_opportunity_xf.primary_campaign_source_id,
       sfdc_opportunity_xf.sales_accepted_date,
       sfdc_opportunity_xf.sales_path,
-      sfdc_opportunity_xf.sales_qualified_date,
+      sfdc_opportunity_xf.sales_qualified_date, -- JK 2022-07-20: the field doesn't exist in prod.restricted_safe_common_mart_sales.mart_crm_opportunity
       sfdc_opportunity_xf.sales_type,
       sfdc_opportunity_xf.sdr_pipeline_contribution,
       sfdc_opportunity_xf.source_buckets,
       sfdc_opportunity_xf.stage_name,
-      sfdc_opportunity_xf.stage_is_active,
-      sfdc_opportunity_xf.stage_is_closed,
-      sfdc_opportunity_xf.technical_evaluation_date,
+      sfdc_opportunity_xf.stage_is_active, -- JK 2022-07-20: the field doesn't exist in prod.restricted_safe_common_mart_sales.mart_crm_opportunity
+      sfdc_opportunity_xf.stage_is_closed, -- JK 2022-07-20: the field doesn't exist in prod.restricted_safe_common_mart_sales.mart_crm_opportunity
+      sfdc_opportunity_xf.technical_evaluation_date, -- JK 2022-07-20: the field doesn't exist in prod.restricted_safe_common_mart_sales.mart_crm_opportunity
 
-      sfdc_opportunity_xf.acv,
+      sfdc_opportunity_xf.acv, -- JK 2022-07-20: the field doesn't exist in prod.restricted_safe_common_mart_sales.mart_crm_opportunity
       sfdc_opportunity_xf.amount,
-      sfdc_opportunity_xf.closed_deals,
-      sfdc_opportunity_xf.competitors,
-      sfdc_opportunity_xf.critical_deal_flag,
+      sfdc_opportunity_xf.closed_deals, -- JK 2022-07-20: the field doesn't exist in prod.restricted_safe_common_mart_sales.mart_crm_opportunity
+      sfdc_opportunity_xf.competitors, -- JK 2022-07-20: the field doesn't exist in prod.restricted_safe_common_mart_sales.mart_crm_opportunity
+      sfdc_opportunity_xf.critical_deal_flag, -- JK 2022-07-20: the field doesn't exist in prod.restricted_safe_common_mart_sales.mart_crm_opportunity
       sfdc_opportunity_xf.fpa_master_bookings_flag,
 
       -- Deal Size field is wrong in the source object
       -- it is using
       -- sfdc_opportunity_xf.deal_size,    
       
-      sfdc_opportunity_xf.forecast_category_name,
-      sfdc_opportunity_xf.forecasted_iacv,
-      sfdc_opportunity_xf.incremental_acv,
-      sfdc_opportunity_xf.invoice_number,
+      sfdc_opportunity_xf.forecast_category_name, -- JK 2022-07-20: the field doesn't exist in prod.restricted_safe_common_mart_sales.mart_crm_opportunity
+      sfdc_opportunity_xf.forecasted_iacv, -- JK 2022-07-20: the field doesn't exist in prod.restricted_safe_common_mart_sales.mart_crm_opportunity
+      sfdc_opportunity_xf.incremental_acv, -- JK 2022-07-20: iacv in prod.restricted_safe_common_mart_sales.mart_crm_opportunity
+      sfdc_opportunity_xf.invoice_number, -- JK 2022-07-20: the field doesn't exist in prod.restricted_safe_common_mart_sales.mart_crm_opportunity
 
       -- logic needs to be added here once the oppotunity category fields is merged
       -- https://gitlab.com/gitlab-data/analytics/-/issues/7888
@@ -129,102 +129,102 @@ we can delete this connection and use the mart table directly.
         ELSE 0
       END                                                          AS is_contract_reset_flag,
   
-      sfdc_opportunity_xf.is_downgrade,
+      sfdc_opportunity_xf.is_downgrade, -- JK 2022-07-20: the field doesn't exist in prod.restricted_safe_common_mart_sales.mart_crm_opportunity
       sfdc_opportunity_xf.is_edu_oss,
       CAST(sfdc_opportunity_xf.is_won AS INTEGER)                   AS is_won,
-      sfdc_opportunity_xf.net_incremental_acv,
+      sfdc_opportunity_xf.net_incremental_acv, -- JK 2022-07-20 net_iacv in mart_crm_opportunity
       sfdc_opportunity_xf.professional_services_value,
       sfdc_opportunity_xf.reason_for_loss,
-      sfdc_opportunity_xf.reason_for_loss_details,
-      sfdc_opportunity_xf.downgrade_reason,
-      sfdc_opportunity_xf.renewal_acv,
-      sfdc_opportunity_xf.renewal_amount,
+      sfdc_opportunity_xf.reason_for_loss_details, -- JK 2022-07-20: the field doesn't exist in prod.restricted_safe_common_mart_sales.mart_crm_opportunity
+      sfdc_opportunity_xf.downgrade_reason, -- JK 2022-07-20: the field doesn't exist in prod.restricted_safe_common_mart_sales.mart_crm_opportunity
+      sfdc_opportunity_xf.renewal_acv, -- JK 2022-07-20: the field doesn't exist in prod.restricted_safe_common_mart_sales.mart_crm_opportunity
+      sfdc_opportunity_xf.renewal_amount, -- JK 2022-07-20: the field doesn't exist in prod.restricted_safe_common_mart_sales.mart_crm_opportunity
       CASE
         WHEN sfdc_opportunity_xf.sales_qualified_source = 'BDR Generated'
             THEN 'SDR Generated'
         ELSE COALESCE(sfdc_opportunity_xf.sales_qualified_source,'NA')
       END                                                           AS sales_qualified_source,
 
-      sfdc_opportunity_xf.solutions_to_be_replaced,
-      sfdc_opportunity_xf.total_contract_value,
-      sfdc_opportunity_xf.upside_iacv,
+      sfdc_opportunity_xf.solutions_to_be_replaced, -- JK 2022-07-20: the field doesn't exist in prod.restricted_safe_common_mart_sales.mart_crm_opportunity
+      sfdc_opportunity_xf.total_contract_value, -- JK 2022-07-20: the field doesn't exist in prod.restricted_safe_common_mart_sales.mart_crm_opportunity
+      sfdc_opportunity_xf.upside_iacv, -- JK 2022-07-20: the field doesn't exist in prod.restricted_safe_common_mart_sales.mart_crm_opportunity
       sfdc_opportunity_xf.is_web_portal_purchase,
-      sfdc_opportunity_xf.subscription_start_date,
-      sfdc_opportunity_xf.subscription_end_date,
+      sfdc_opportunity_xf.subscription_start_date, -- JK 2022-07-20: the field doesn't exist in prod.restricted_safe_common_mart_sales.mart_crm_opportunity
+      sfdc_opportunity_xf.subscription_end_date, -- JK 2022-07-20: the field doesn't exist in prod.restricted_safe_common_mart_sales.mart_crm_opportunity
   
       -----------------------------------------------------------
       -----------------------------------------------------------
       -- New fields for FY22 - including user segment / region fields
 
-      sfdc_opportunity_xf.order_type_live,
-      sfdc_opportunity_xf.order_type_stamped,
+      sfdc_opportunity_xf.order_type_live, -- JK 2022-07-20: available order type related fields: order_type & order_type_grouped
+      sfdc_opportunity_xf.order_type_stamped, -- JK 2022-07-20: available order type related fields: order_type & order_type_grouped
 
       COALESCE(sfdc_opportunity_xf.net_arr,0)                 AS raw_net_arr,
-      sfdc_opportunity_xf.recurring_amount,
-      sfdc_opportunity_xf.true_up_amount,
-      sfdc_opportunity_xf.proserv_amount,
-      sfdc_opportunity_xf.other_non_recurring_amount,
-      sfdc_opportunity_xf.arr_basis,
-      sfdc_opportunity_xf.arr,
+      sfdc_opportunity_xf.recurring_amount, -- JK 2022-07-20: the field doesn't exist in prod.restricted_safe_common_mart_sales.mart_crm_opportunity
+      sfdc_opportunity_xf.true_up_amount, -- JK 2022-07-20: the field doesn't exist in prod.restricted_safe_common_mart_sales.mart_crm_opportunity
+      sfdc_opportunity_xf.proserv_amount, -- JK 2022-07-20: the field doesn't exist in prod.restricted_safe_common_mart_sales.mart_crm_opportunity
+      sfdc_opportunity_xf.other_non_recurring_amount, -- JK 2022-07-20: the field doesn't exist in prod.restricted_safe_common_mart_sales.mart_crm_opportunity
+      sfdc_opportunity_xf.arr_basis, 
+      sfdc_opportunity_xf.arr, -- JK 2022-07-20: the field doesn't exist in prod.restricted_safe_common_mart_sales.mart_crm_opportunity
 
       -----------------------------------------------------------
       -----------------------------------------------------------
 
-      sfdc_opportunity_xf.opportunity_health,
-      sfdc_opportunity_xf.is_risky,
-      sfdc_opportunity_xf.risk_type,
-      sfdc_opportunity_xf.risk_reasons,
-      sfdc_opportunity_xf.tam_notes,
-      sfdc_opportunity_xf.days_in_1_discovery,
-      sfdc_opportunity_xf.days_in_2_scoping,
-      sfdc_opportunity_xf.days_in_3_technical_evaluation,
-      sfdc_opportunity_xf.days_in_4_proposal,
-      sfdc_opportunity_xf.days_in_5_negotiating,
-      sfdc_opportunity_xf.stage_0_pending_acceptance_date,
-      sfdc_opportunity_xf.stage_1_discovery_date,
-      sfdc_opportunity_xf.stage_2_scoping_date,
-      sfdc_opportunity_xf.stage_3_technical_evaluation_date,
-      sfdc_opportunity_xf.stage_4_proposal_date,
-      sfdc_opportunity_xf.stage_5_negotiating_date,
-      sfdc_opportunity_xf.stage_6_awaiting_signature_date,
-      sfdc_opportunity_xf.stage_6_closed_won_date,
-      sfdc_opportunity_xf.stage_6_closed_lost_date,
-      sfdc_opportunity_xf.cp_champion,
-      sfdc_opportunity_xf.cp_close_plan,
-      sfdc_opportunity_xf.cp_competition,
-      sfdc_opportunity_xf.cp_decision_criteria,
-      sfdc_opportunity_xf.cp_decision_process,
-      sfdc_opportunity_xf.cp_economic_buyer,
-      sfdc_opportunity_xf.cp_identify_pain,
-      sfdc_opportunity_xf.cp_metrics,
-      sfdc_opportunity_xf.cp_risks,
-      sfdc_opportunity_xf.cp_use_cases,
-      sfdc_opportunity_xf.cp_value_driver,
-      sfdc_opportunity_xf.cp_why_do_anything_at_all,
-      sfdc_opportunity_xf.cp_why_gitlab,
-      sfdc_opportunity_xf.cp_why_now,
-      sfdc_opportunity_xf.cp_score,
+      sfdc_opportunity_xf.opportunity_health, -- JK 2022-07-20: the field doesn't exist in prod.restricted_safe_common_mart_sales.mart_crm_opportunity
+      sfdc_opportunity_xf.is_risky, -- JK 2022-07-20: the field doesn't exist in prod.restricted_safe_common_mart_sales.mart_crm_opportunity
+      sfdc_opportunity_xf.risk_type, -- JK 2022-07-20: the field doesn't exist in prod.restricted_safe_common_mart_sales.mart_crm_opportunity
+      sfdc_opportunity_xf.risk_reasons, -- JK 2022-07-20: the field doesn't exist in prod.restricted_safe_common_mart_sales.mart_crm_opportunity
+      sfdc_opportunity_xf.tam_notes, -- JK 2022-07-20: the field doesn't exist in prod.restricted_safe_common_mart_sales.mart_crm_opportunity
+      sfdc_opportunity_xf.days_in_1_discovery, -- JK 2022-07-20: the field doesn't exist in prod.restricted_safe_common_mart_sales.mart_crm_opportunity
+      sfdc_opportunity_xf.days_in_2_scoping, -- JK 2022-07-20: the field doesn't exist in prod.restricted_safe_common_mart_sales.mart_crm_opportunity
+      sfdc_opportunity_xf.days_in_3_technical_evaluation, -- JK 2022-07-20: the field doesn't exist in prod.restricted_safe_common_mart_sales.mart_crm_opportunity
+      sfdc_opportunity_xf.days_in_4_proposal, -- JK 2022-07-20: the field doesn't exist in prod.restricted_safe_common_mart_sales.mart_crm_opportunity
+      sfdc_opportunity_xf.days_in_5_negotiating, -- JK 2022-07-20: the field doesn't exist in prod.restricted_safe_common_mart_sales.mart_crm_opportunity
+      sfdc_opportunity_xf.stage_0_pending_acceptance_date, -- JK 2022-07-20: the field doesn't exist in prod.restricted_safe_common_mart_sales.mart_crm_opportunity
+      sfdc_opportunity_xf.stage_1_discovery_date, -- JK 2022-07-20: the field doesn't exist in prod.restricted_safe_common_mart_sales.mart_crm_opportunity
+      sfdc_opportunity_xf.stage_2_scoping_date, -- JK 2022-07-20: the field doesn't exist in prod.restricted_safe_common_mart_sales.mart_crm_opportunity
+      sfdc_opportunity_xf.stage_3_technical_evaluation_date, -- JK 2022-07-20: the field doesn't exist in prod.restricted_safe_common_mart_sales.mart_crm_opportunity
+      sfdc_opportunity_xf.stage_4_proposal_date, -- JK 2022-07-20: the field doesn't exist in prod.restricted_safe_common_mart_sales.mart_crm_opportunity
+      sfdc_opportunity_xf.stage_5_negotiating_date, -- JK 2022-07-20: the field doesn't exist in prod.restricted_safe_common_mart_sales.mart_crm_opportunity
+      sfdc_opportunity_xf.stage_6_awaiting_signature_date, -- JK 2022-07-20: the field doesn't exist in prod.restricted_safe_common_mart_sales.mart_crm_opportunity
+      sfdc_opportunity_xf.stage_6_closed_won_date, -- JK 2022-07-20: the field doesn't exist in prod.restricted_safe_common_mart_sales.mart_crm_opportunity
+      sfdc_opportunity_xf.stage_6_closed_lost_date, -- JK 2022-07-20: the field doesn't exist in prod.restricted_safe_common_mart_sales.mart_crm_opportunity
+      sfdc_opportunity_xf.cp_champion, -- JK 2022-07-20: the field doesn't exist in prod.restricted_safe_common_mart_sales.mart_crm_opportunity
+      sfdc_opportunity_xf.cp_close_plan, -- JK 2022-07-20: the field doesn't exist in prod.restricted_safe_common_mart_sales.mart_crm_opportunity
+      sfdc_opportunity_xf.cp_competition, -- JK 2022-07-20: the field doesn't exist in prod.restricted_safe_common_mart_sales.mart_crm_opportunity
+      sfdc_opportunity_xf.cp_decision_criteria, -- JK 2022-07-20: the field doesn't exist in prod.restricted_safe_common_mart_sales.mart_crm_opportunity
+      sfdc_opportunity_xf.cp_decision_process, -- JK 2022-07-20: the field doesn't exist in prod.restricted_safe_common_mart_sales.mart_crm_opportunity
+      sfdc_opportunity_xf.cp_economic_buyer, -- JK 2022-07-20: the field doesn't exist in prod.restricted_safe_common_mart_sales.mart_crm_opportunity
+      sfdc_opportunity_xf.cp_identify_pain, -- JK 2022-07-20: the field doesn't exist in prod.restricted_safe_common_mart_sales.mart_crm_opportunity
+      sfdc_opportunity_xf.cp_metrics, -- JK 2022-07-20: the field doesn't exist in prod.restricted_safe_common_mart_sales.mart_crm_opportunity
+      sfdc_opportunity_xf.cp_risks, -- JK 2022-07-20: the field doesn't exist in prod.restricted_safe_common_mart_sales.mart_crm_opportunity
+      sfdc_opportunity_xf.cp_use_cases, -- JK 2022-07-20: the field doesn't exist in prod.restricted_safe_common_mart_sales.mart_crm_opportunity
+      sfdc_opportunity_xf.cp_value_driver, -- JK 2022-07-20: the field doesn't exist in prod.restricted_safe_common_mart_sales.mart_crm_opportunity
+      sfdc_opportunity_xf.cp_why_do_anything_at_all, -- JK 2022-07-20: the field doesn't exist in prod.restricted_safe_common_mart_sales.mart_crm_opportunity
+      sfdc_opportunity_xf.cp_why_gitlab, -- JK 2022-07-20: the field doesn't exist in prod.restricted_safe_common_mart_sales.mart_crm_opportunity
+      sfdc_opportunity_xf.cp_why_now, -- JK 2022-07-20: the field doesn't exist in prod.restricted_safe_common_mart_sales.mart_crm_opportunity
+      sfdc_opportunity_xf.cp_score, -- JK 2022-07-20: the field doesn't exist in prod.restricted_safe_common_mart_sales.mart_crm_opportunity
 
       -----------------------------------------------------------
       -----------------------------------------------------------
 
       -- used for segment reporting in FY21 and before
-      sfdc_opportunity_xf.account_owner_team_stamped,
+      sfdc_opportunity_xf.account_owner_team_stamped, -- JK 2022-07-20: the field doesn't exist in prod.restricted_safe_common_mart_sales.mart_crm_opportunity
 
       -- NF: why do we need these fields now?
-      sfdc_opportunity_xf.division_sales_segment_stamped,
-      sfdc_opportunity_xf.tsp_max_hierarchy_sales_segment,
-      sfdc_opportunity_xf.division_sales_segment,
-      sfdc_opportunity_xf.ultimate_parent_sales_segment,
-      sfdc_opportunity_xf.sales_segment,
-      sfdc_opportunity_xf.parent_segment,
+      sfdc_opportunity_xf.division_sales_segment_stamped, -- JK 2022-07-20: the field doesn't exist in prod.restricted_safe_common_mart_sales.mart_crm_opportunity
+      sfdc_opportunity_xf.tsp_max_hierarchy_sales_segment, -- JK 2022-07-20: the field doesn't exist in prod.restricted_safe_common_mart_sales.mart_crm_opportunity
+      sfdc_opportunity_xf.division_sales_segment, -- JK 2022-07-20: the field doesn't exist in prod.restricted_safe_common_mart_sales.mart_crm_opportunity
+      sfdc_opportunity_xf.ultimate_parent_sales_segment, -- JK 2022-07-20: the field doesn't exist in prod.restricted_safe_common_mart_sales.mart_crm_opportunity
+      sfdc_opportunity_xf.sales_segment, -- JK 2022-07-20: crm_account_user_sales_segment in the mart?
+      sfdc_opportunity_xf.parent_segment, -- JK 2022-07-20: parent_crm_account_sales_segment in the mart?
 
       -----------------------------------------------------------
       -----------------------------------------------------------
       -- Channel Org. fields
-      sfdc_opportunity_xf.deal_path,
-      sfdc_opportunity_xf.dr_partner_deal_type,
-      sfdc_opportunity_xf.dr_partner_engagement,
+      sfdc_opportunity_xf.deal_path, -- JK 2022-07-20: deal_path_name
+      sfdc_opportunity_xf.dr_partner_deal_type, 
+      sfdc_opportunity_xf.dr_partner_engagement, -- JK 2022-07-20: dr_partner_engagement_name
       sfdc_opportunity_xf.partner_account       AS partner_account,
       partner_account.account_name              AS partner_account_name,
       sfdc_opportunity_xf.dr_status,
@@ -271,10 +271,10 @@ we can delete this connection and use the mart table directly.
       END                                                         AS deal_path_engagement,
 
 
-      sfdc_opportunity_xf.stage_name_3plus,
-      sfdc_opportunity_xf.stage_name_4plus,
-      sfdc_opportunity_xf.is_stage_3_plus,
-      sfdc_opportunity_xf.is_lost,
+      sfdc_opportunity_xf.stage_name_3plus, -- JK 2022-07-20: the field doesn't exist in prod.restricted_safe_common_mart_sales.mart_crm_opportunity
+      sfdc_opportunity_xf.stage_name_4plus, -- JK 2022-07-20: the field doesn't exist in prod.restricted_safe_common_mart_sales.mart_crm_opportunity
+      sfdc_opportunity_xf.is_stage_3_plus, -- JK 2022-07-20: the field doesn't exist in prod.restricted_safe_common_mart_sales.mart_crm_opportunity
+      sfdc_opportunity_xf.is_lost, -- JK 2022-07-20: the field doesn't exist in prod.restricted_safe_common_mart_sales.mart_crm_opportunity
       
       -- NF: Excluded 'Duplicate' stage from is_open definition
       CASE 
@@ -290,37 +290,37 @@ we can delete this connection and use the mart table directly.
       END                                                         AS is_duplicate_flag,
 
       sfdc_opportunity_xf.is_closed,
-      sfdc_opportunity_xf.stage_category,
-      sfdc_opportunity_xf.is_renewal,
-      sfdc_opportunity_xf.close_fiscal_quarter_name,
-      sfdc_opportunity_xf.close_fiscal_quarter_date,
-      sfdc_opportunity_xf.close_fiscal_year,
-      sfdc_opportunity_xf.close_date_month,
-      sfdc_opportunity_xf.created_fiscal_quarter_name,
-      sfdc_opportunity_xf.created_fiscal_quarter_date,
-      sfdc_opportunity_xf.created_fiscal_year,
-      sfdc_opportunity_xf.created_date_month,
-      sfdc_opportunity_xf.subscription_start_date_fiscal_quarter_name,
-      sfdc_opportunity_xf.subscription_start_date_fiscal_quarter_date,
-      sfdc_opportunity_xf.subscription_start_date_fiscal_year,
-      sfdc_opportunity_xf.subscription_start_date_month,
-      sfdc_opportunity_xf.sales_accepted_fiscal_quarter_name,
-      sfdc_opportunity_xf.sales_accepted_fiscal_quarter_date,
-      sfdc_opportunity_xf.sales_accepted_fiscal_year,
-      sfdc_opportunity_xf.sales_accepted_date_month AS sales_accepted_month,
-      sfdc_opportunity_xf.sales_qualified_fiscal_quarter_name,
-      sfdc_opportunity_xf.sales_qualified_fiscal_quarter_date,
-      sfdc_opportunity_xf.sales_qualified_fiscal_year,
-      sfdc_opportunity_xf.sales_qualified_date_month,
+      sfdc_opportunity_xf.stage_category, -- JK 2022-07-20: the field doesn't exist in prod.restricted_safe_common_mart_sales.mart_crm_opportunity
+      sfdc_opportunity_xf.is_renewal, -- JK 2022-07-20: the field doesn't exist in prod.restricted_safe_common_mart_sales.mart_crm_opportunity
+      sfdc_opportunity_xf.close_fiscal_quarter_name, -- JK 2022-07-20: the field doesn't exist in prod.restricted_safe_common_mart_sales.mart_crm_opportunity
+      sfdc_opportunity_xf.close_fiscal_quarter_date, -- JK 2022-07-20: the field doesn't exist in prod.restricted_safe_common_mart_sales.mart_crm_opportunity
+      sfdc_opportunity_xf.close_fiscal_year, -- JK 2022-07-20: the field doesn't exist in prod.restricted_safe_common_mart_sales.mart_crm_opportunity
+      sfdc_opportunity_xf.close_date_month, -- JK 2022-07-20: the field doesn't exist in prod.restricted_safe_common_mart_sales.mart_crm_opportunity
+      sfdc_opportunity_xf.created_fiscal_quarter_name, -- JK 2022-07-20: the field doesn't exist in prod.restricted_safe_common_mart_sales.mart_crm_opportunity
+      sfdc_opportunity_xf.created_fiscal_quarter_date, -- JK 2022-07-20: the field doesn't exist in prod.restricted_safe_common_mart_sales.mart_crm_opportunity
+      sfdc_opportunity_xf.created_fiscal_year, -- JK 2022-07-20: the field doesn't exist in prod.restricted_safe_common_mart_sales.mart_crm_opportunity
+      sfdc_opportunity_xf.created_date_month, -- JK 2022-07-20: the field doesn't exist in prod.restricted_safe_common_mart_sales.mart_crm_opportunity
+      sfdc_opportunity_xf.subscription_start_date_fiscal_quarter_name, -- JK 2022-07-20: the field doesn't exist in prod.restricted_safe_common_mart_sales.mart_crm_opportunity
+      sfdc_opportunity_xf.subscription_start_date_fiscal_quarter_date, -- JK 2022-07-20: the field doesn't exist in prod.restricted_safe_common_mart_sales.mart_crm_opportunity
+      sfdc_opportunity_xf.subscription_start_date_fiscal_year, -- JK 2022-07-20: the field doesn't exist in prod.restricted_safe_common_mart_sales.mart_crm_opportunity
+      sfdc_opportunity_xf.subscription_start_date_month, -- JK 2022-07-20: the field doesn't exist in prod.restricted_safe_common_mart_sales.mart_crm_opportunity
+      sfdc_opportunity_xf.sales_accepted_fiscal_quarter_name, -- JK 2022-07-20: the field doesn't exist in prod.restricted_safe_common_mart_sales.mart_crm_opportunity
+      sfdc_opportunity_xf.sales_accepted_fiscal_quarter_date, -- JK 2022-07-20: the field doesn't exist in prod.restricted_safe_common_mart_sales.mart_crm_opportunity
+      sfdc_opportunity_xf.sales_accepted_fiscal_year, -- JK 2022-07-20: the field doesn't exist in prod.restricted_safe_common_mart_sales.mart_crm_opportunity
+      sfdc_opportunity_xf.sales_accepted_date_month AS sales_accepted_month, -- JK 2022-07-20: the field doesn't exist in prod.restricted_safe_common_mart_sales.mart_crm_opportunity
+      sfdc_opportunity_xf.sales_qualified_fiscal_quarter_name, -- JK 2022-07-20: the field doesn't exist in prod.restricted_safe_common_mart_sales.mart_crm_opportunity
+      sfdc_opportunity_xf.sales_qualified_fiscal_quarter_date, -- JK 2022-07-20: the field doesn't exist in prod.restricted_safe_common_mart_sales.mart_crm_opportunity
+      sfdc_opportunity_xf.sales_qualified_fiscal_year, -- JK 2022-07-20: the field doesn't exist in prod.restricted_safe_common_mart_sales.mart_crm_opportunity
+      sfdc_opportunity_xf.sales_qualified_date_month, -- JK 2022-07-20: the field doesn't exist in prod.restricted_safe_common_mart_sales.mart_crm_opportunity
 
       -- Net ARR Created Date uses the same old IACV Created date field in SFDC
       -- As long as the field in the legacy model is not renamed, this will work
 
-      sfdc_opportunity_xf.iacv_created_date                   AS net_arr_created_date,
-      sfdc_opportunity_xf.iacv_created_fiscal_quarter_name    AS net_arr_created_fiscal_quarter_name,
-      sfdc_opportunity_xf.iacv_created_fiscal_quarter_date    AS net_arr_created_fiscal_quarter_date,
-      sfdc_opportunity_xf.iacv_created_fiscal_year            AS net_arr_created_fiscal_year,
-      sfdc_opportunity_xf.iacv_created_date_month             AS net_arr_created_date_month,
+      sfdc_opportunity_xf.iacv_created_date                   AS net_arr_created_date, -- JK 2022-07-20: the field doesn't exist in prod.restricted_safe_common_mart_sales.mart_crm_opportunity
+      sfdc_opportunity_xf.iacv_created_fiscal_quarter_name    AS net_arr_created_fiscal_quarter_name, -- JK 2022-07-20: the field doesn't exist in prod.restricted_safe_common_mart_sales.mart_crm_opportunity
+      sfdc_opportunity_xf.iacv_created_fiscal_quarter_date    AS net_arr_created_fiscal_quarter_date, -- JK 2022-07-20: the field doesn't exist in prod.restricted_safe_common_mart_sales.mart_crm_opportunity
+      sfdc_opportunity_xf.iacv_created_fiscal_year            AS net_arr_created_fiscal_year, -- JK 2022-07-20: the field doesn't exist in prod.restricted_safe_common_mart_sales.mart_crm_opportunity
+      sfdc_opportunity_xf.iacv_created_date_month             AS net_arr_created_date_month, -- JK 2022-07-20: the field doesn't exist in prod.restricted_safe_common_mart_sales.mart_crm_opportunity
 
       stage_1_date.date_actual                                AS stage_1_date,
       stage_1_date.first_day_of_month                         AS stage_1_date_month,
@@ -336,18 +336,18 @@ we can delete this connection and use the mart table directly.
 
       ------------------------------------
 
-      sfdc_opportunity_xf._last_dbt_run,
-      sfdc_opportunity_xf.business_process_id,
-      sfdc_opportunity_xf.days_since_last_activity,
-      sfdc_opportunity_xf.is_deleted,
-      sfdc_opportunity_xf.last_activity_date,
-      sfdc_opportunity_xf.record_type_description,
-      sfdc_opportunity_xf.record_type_id,
-      sfdc_opportunity_xf.record_type_label,
-      sfdc_opportunity_xf.record_type_modifying_object_type,
-      sfdc_opportunity_xf.record_type_name,
-      sfdc_opportunity_xf.region_quota_id,
-      sfdc_opportunity_xf.sales_quota_id,
+      sfdc_opportunity_xf._last_dbt_run, -- JK 2022-07-20: the field doesn't exist in prod.restricted_safe_common_mart_sales.mart_crm_opportunity
+      sfdc_opportunity_xf.business_process_id, -- JK 2022-07-20: the field doesn't exist in prod.restricted_safe_common_mart_sales.mart_crm_opportunity
+      sfdc_opportunity_xf.days_since_last_activity, -- JK 2022-07-20: the field doesn't exist in prod.restricted_safe_common_mart_sales.mart_crm_opportunity
+      sfdc_opportunity_xf.is_deleted, -- JK 2022-07-20: the field doesn't exist in prod.restricted_safe_common_mart_sales.mart_crm_opportunity
+      sfdc_opportunity_xf.last_activity_date, -- JK 2022-07-20: the field doesn't exist in prod.restricted_safe_common_mart_sales.mart_crm_opportunity
+      sfdc_opportunity_xf.record_type_description, -- JK 2022-07-20: the field doesn't exist in prod.restricted_safe_common_mart_sales.mart_crm_opportunity
+      sfdc_opportunity_xf.record_type_id, -- JK 2022-07-20: the field doesn't exist in prod.restricted_safe_common_mart_sales.mart_crm_opportunity
+      sfdc_opportunity_xf.record_type_label, -- JK 2022-07-20: the field doesn't exist in prod.restricted_safe_common_mart_sales.mart_crm_opportunity
+      sfdc_opportunity_xf.record_type_modifying_object_type, -- JK 2022-07-20: the field doesn't exist in prod.restricted_safe_common_mart_sales.mart_crm_opportunity
+      sfdc_opportunity_xf.record_type_name, -- JK 2022-07-20: the field doesn't exist in prod.restricted_safe_common_mart_sales.mart_crm_opportunity
+      sfdc_opportunity_xf.region_quota_id, -- JK 2022-07-20: the field doesn't exist in prod.restricted_safe_common_mart_sales.mart_crm_opportunity
+      sfdc_opportunity_xf.sales_quota_id, -- JK 2022-07-20: the field doesn't exist in prod.restricted_safe_common_mart_sales.mart_crm_opportunity
 
       -----------------------------------------------------------------------------------------------------      
       -----------------------------------------------------------------------------------------------------
@@ -360,17 +360,22 @@ we can delete this connection and use the mart table directly.
       -- NF 2022-01-28 Data seems clean in SFDC, but leving the fallback just in case
       -- NF 2022-04-27 There are issues with the stamped field not reflecting the real owner of the opportunity
       --                adding is_open check here to default open deals to opportunity owners fields (instead of stamped)
+
+
+      -- JK 2022-07-20
+      -- align segment, geo, region, field (same field names are not available in marts)
+      -- crm_opp_owner_xxxx AND crm_account_user_xxx --> which ones are we using?
       CASE 
-        WHEN sfdc_opportunity_xf.user_segment_stamped IS NULL 
-            OR sfdc_opportunity_xf.is_open = 1
-          THEN opportunity_owner.user_segment 
+        WHEN sfdc_opportunity_xf.user_segment_stamped IS NULL   -- JK 2022-07-20: doesn't exist? There are a few user_sales_segment fields but are they the same?
+            OR sfdc_opportunity_xf.is_open = 1  -- JK 2022-07-20: the field doesn't exist in prod.restricted_safe_common_mart_sales.mart_crm_opportunity
+          THEN opportunity_owner.user_segment -- JK 2022-07-20: regarding user segment
         ELSE sfdc_opportunity_xf.user_segment_stamped
       END                                                                   AS opportunity_owner_user_segment,
 
       CASE 
-        WHEN sfdc_opportunity_xf.user_geo_stamped IS NULL 
+        WHEN sfdc_opportunity_xf.user_geo_stamped IS NULL  --JK 2022-07-20: is it the same as crm_opp_owner_geo_stamped? 
             OR sfdc_opportunity_xf.is_open = 1
-          THEN opportunity_owner.user_geo
+          THEN opportunity_owner.user_geo 
         ELSE sfdc_opportunity_xf.user_geo_stamped
       END                                                                   AS opportunity_owner_user_geo,
 
@@ -394,7 +399,7 @@ we can delete this connection and use the mart table directly.
 
       -- NF: 20210827 Fields for competitor analysis 
       CASE
-        WHEN CONTAINS (sfdc_opportunity_xf.competitors, 'Other') 
+        WHEN CONTAINS (sfdc_opportunity_xf.competitors, 'Other') -- JK 2022-07-20: the field doesn't exist in prod.restricted_safe_common_mart_sales.mart_crm_opportunity
           THEN 1 
         ELSE 0
       END                                 AS competitors_other_flag,
@@ -517,7 +522,7 @@ we can delete this connection and use the mart table directly.
         WHEN 'Yes'
           THEN 1 
         ELSE 0
-      END                                 AS is_comp_new_logo_override
+      END                                 AS is_comp_new_logo_override    -- JK 2022-07-20: the field doesn't exist in the mart/ needs to be added
     
     FROM {{ref('sfdc_opportunity_xf')}} sfdc_opportunity_xf
     -- not all fields are in opportunity xf

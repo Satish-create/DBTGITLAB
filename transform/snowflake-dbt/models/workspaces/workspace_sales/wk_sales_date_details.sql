@@ -1,5 +1,6 @@
 {{ config(alias='date_details') }}
 
+-- JK 2022-07-20: we can replace the source to prod.common.dim_date
 WITH date_details AS (
 
     SELECT

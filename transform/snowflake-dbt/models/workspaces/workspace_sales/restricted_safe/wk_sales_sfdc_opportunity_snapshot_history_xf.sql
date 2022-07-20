@@ -156,7 +156,7 @@ WITH date_details AS (
       --sfdc_opportunity_snapshot_history.parent_segment,
       sfdc_opportunity_snapshot_history.sales_accepted_date,
       sfdc_opportunity_snapshot_history.sales_path,
-      sfdc_opportunity_snapshot_history.sales_qualified_date,
+      sfdc_opportunity_snapshot_history.sales_qualified_date,  -- JK 2022-07-20: the field doesn't exist in prod.restricted_safe_common_mart_sales.mart_crm_opportunity_daily_snapshot
       --sfdc_opportunity_snapshot_history.sales_segment,
       sfdc_opportunity_snapshot_history.sales_type,
       sfdc_opportunity_snapshot_history.net_new_source_categories,
@@ -209,7 +209,7 @@ WITH date_details AS (
       sfdc_opportunity_snapshot_history.downgrade_iacv,
       sfdc_opportunity_snapshot_history.renewal_acv,
       sfdc_opportunity_snapshot_history.renewal_amount,
-      sfdc_opportunity_snapshot_history.sales_qualified_source  AS snapshot_sales_qualified_source,
+      sfdc_opportunity_snapshot_history.sales_qualified_source  AS snapshot_sales_qualified_source,   -- JK 2022-07-20: sales_qualified_source_name in the mart
       sfdc_opportunity_snapshot_history.is_edu_oss  AS snapshot_is_edu_oss,
 
       --sfdc_opportunity_snapshot_history.segment,
@@ -222,7 +222,7 @@ WITH date_details AS (
       
       sfdc_opportunity_snapshot_history.net_arr             AS raw_net_arr,
       
-      --sfdc_opportunity_snapshot_history.user_segment_stamped,
+      --sfdc_opportunity_snapshot_history.user_segment_stamped
       --sfdc_opportunity_snapshot_history.user_region_stamped,
       --sfdc_opportunity_snapshot_history.user_area_stamped,
       --sfdc_opportunity_snapshot_history.user_geo_stamped,
@@ -237,24 +237,24 @@ WITH date_details AS (
       sfdc_opportunity_snapshot_history.subscription_start_date,
       sfdc_opportunity_snapshot_history.subscription_end_date,
       
-      sfdc_opportunity_snapshot_history.cp_champion,
-      sfdc_opportunity_snapshot_history.cp_close_plan,
-      sfdc_opportunity_snapshot_history.cp_competition,
-      sfdc_opportunity_snapshot_history.cp_decision_criteria,
-      sfdc_opportunity_snapshot_history.cp_decision_process,
-      sfdc_opportunity_snapshot_history.cp_economic_buyer,
-      sfdc_opportunity_snapshot_history.cp_identify_pain,
-      sfdc_opportunity_snapshot_history.cp_metrics,
-      sfdc_opportunity_snapshot_history.cp_risks,
+      sfdc_opportunity_snapshot_history.cp_champion,  -- JK 2022-07-20: field doesn't exist in mart_crm_opportunity_daily_snapshot
+      sfdc_opportunity_snapshot_history.cp_close_plan, -- JK 2022-07-20: field doesn't exist in mart_crm_opportunity_daily_snapshot
+      sfdc_opportunity_snapshot_history.cp_competition, -- JK 2022-07-20: field doesn't exist in mart_crm_opportunity_daily_snapshot
+      sfdc_opportunity_snapshot_history.cp_decision_criteria, -- JK 2022-07-20: field doesn't exist in mart_crm_opportunity_daily_snapshot
+      sfdc_opportunity_snapshot_history.cp_decision_process, -- JK 2022-07-20: field doesn't exist in mart_crm_opportunity_daily_snapshot
+      sfdc_opportunity_snapshot_history.cp_economic_buyer, -- JK 2022-07-20: field doesn't exist in mart_crm_opportunity_daily_snapshot
+      sfdc_opportunity_snapshot_history.cp_identify_pain, -- JK 2022-07-20: field doesn't exist in mart_crm_opportunity_daily_snapshot
+      sfdc_opportunity_snapshot_history.cp_metrics, -- JK 2022-07-20: field doesn't exist in mart_crm_opportunity_daily_snapshot
+      sfdc_opportunity_snapshot_history.cp_risks, -- JK 2022-07-20: field doesn't exist in mart_crm_opportunity_daily_snapshot
       
       sfdc_opportunity_snapshot_history.cp_use_cases,
-      sfdc_opportunity_snapshot_history.cp_value_driver,
-      sfdc_opportunity_snapshot_history.cp_why_do_anything_at_all,
-      sfdc_opportunity_snapshot_history.cp_why_gitlab,
-      sfdc_opportunity_snapshot_history.cp_why_now,
-      sfdc_opportunity_snapshot_history.cp_score,
+      sfdc_opportunity_snapshot_history.cp_value_driver, -- JK 2022-07-20: field doesn't exist in mart_crm_opportunity_daily_snapshot
+      sfdc_opportunity_snapshot_history.cp_why_do_anything_at_all, -- JK 2022-07-20: field doesn't exist in mart_crm_opportunity_daily_snapshot
+      sfdc_opportunity_snapshot_history.cp_why_gitlab, -- JK 2022-07-20: field doesn't exist in mart_crm_opportunity_daily_snapshot
+      sfdc_opportunity_snapshot_history.cp_why_now, -- JK 2022-07-20: field doesn't exist in mart_crm_opportunity_daily_snapshot
+      sfdc_opportunity_snapshot_history.cp_score, -- JK 2022-07-20: field doesn't exist in mart_crm_opportunity_daily_snapshot
       
-      sfdc_opportunity_snapshot_history._last_dbt_run,
+      sfdc_opportunity_snapshot_history._last_dbt_run,  -- JK 2022-07-20: doesn't exist
       sfdc_opportunity_snapshot_history.is_deleted,
       sfdc_opportunity_snapshot_history.last_activity_date,
       sfdc_opportunity_snapshot_history.record_type_id,
@@ -262,7 +262,7 @@ WITH date_details AS (
 
       -- Channel Org. fields
       -- this fields should be changed to this historical version
-      sfdc_opportunity_snapshot_history.deal_path,
+      sfdc_opportunity_snapshot_history.deal_path,  -- JK 2022-07-20: deal_path_name?
       sfdc_opportunity_snapshot_history.dr_partner_deal_type,
       sfdc_opportunity_snapshot_history.dr_partner_engagement,
       sfdc_opportunity_snapshot_history.partner_account,
