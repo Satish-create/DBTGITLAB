@@ -1,8 +1,10 @@
+version: 2 # Added by Satish
+
 # ======
 # Project Details
 # ======
 name: 'gitlab_snowflake'
-version: '1.0'
+#version: '1.0' #Commented for resolving the errors
 config-version: 2
 profile: 'gitlab-snowflake'
 require-dbt-version: 0.19.1
@@ -16,6 +18,7 @@ test-paths: ["tests"]
 data-paths: ["data"]
 macro-paths: ["macros"]
 target-path: "target"
+model-paths: ["models"] # Added by Satish
 clean-targets:
     - "target"
     - "dbt_modules"

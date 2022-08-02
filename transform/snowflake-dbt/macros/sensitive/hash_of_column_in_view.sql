@@ -3,7 +3,7 @@
     {% set salt_query %}
         select ENCRYPT_RAW(
             to_binary('{{ get_salt(column|lower) }}', 'utf-8'), 
-            to_binary('{{ env_var("SALT_PASSWORD") }}', 'HEX'), 
+            to_binary('{{ env_var("DBT_SALT_PASSWORD") }}', 'HEX'), 
             to_binary('416C736F4E637265FFFFFFAB', 'HEX')
         )['ciphertext']::VARCHAR
     {% endset %}
