@@ -3,7 +3,7 @@ version: 2
 
 sources:
   - name: greenhouse
-    database: '{{ env_var("SNOWFLAKE_LOAD_DATABASE") }}'
+    database: '{{ env_var("DBT_SNOWFLAKE_LOAD_DATABASE") }}'
     schema: greenhouse
     loader: custom
     loaded_at_field: to_timestamp_ntz(_updated_at::number)

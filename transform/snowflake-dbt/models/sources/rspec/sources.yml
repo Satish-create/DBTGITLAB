@@ -2,7 +2,7 @@ version: 2
 
 sources:
   - name: rspec
-    database: '{{ env_var("SNOWFLAKE_LOAD_DATABASE") }}'
+    database: '{{ env_var("DBT_SNOWFLAKE_LOAD_DATABASE") }}'
     schema: rspec
     loader: Stitch
     loaded_at_field: _sdc_batched_at

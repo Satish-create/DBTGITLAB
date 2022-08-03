@@ -3,7 +3,7 @@ version: 2
 sources:
   - name: zuora_revenue
     tags: ["tdf","zuora_revenue"]
-    database: '{{ env_var("SNOWFLAKE_LOAD_DATABASE") }}'
+    database: '{{ env_var("DBT_SNOWFLAKE_LOAD_DATABASE") }}'
     schema: zuora_revenue
     loader: Stitch
     loaded_at_field: _sdc_batched_at

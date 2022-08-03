@@ -2,7 +2,7 @@ version: 2
 
 sources:
   - name: gcp_billing
-    database: '{{ env_var("SNOWFLAKE_LOAD_DATABASE") }}'
+    database: '{{ env_var("DBT_SNOWFLAKE_LOAD_DATABASE") }}'
     schema: gcp_billing
     loaded_at_field: uploaded_at
     loader: Airflow, gcp_billing

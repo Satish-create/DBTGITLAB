@@ -2,7 +2,7 @@ version: 2
 
 sources:
   - name: snowflake
-    database: '{{ env_var("SNOWFLAKE_LOAD_DATABASE") }}'
+    database: '{{ env_var("DBT_SNOWFLAKE_LOAD_DATABASE") }}'
     schema: snowflake
     loader: Airflow
     loaded_at_field: to_timestamp_ntz(_uploaded_at::number)

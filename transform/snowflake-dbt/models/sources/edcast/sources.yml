@@ -2,7 +2,7 @@ version: 2
 
 sources:
   - name: edcast
-    database: '{{ env_var("SNOWFLAKE_LOAD_DATABASE") }}'
+    database: '{{ env_var("DBT_SNOWFLAKE_LOAD_DATABASE") }}'
     tags: ["people", "edcast"]
     schema: tap_edcast
     loaded_at_field: __loaded_at

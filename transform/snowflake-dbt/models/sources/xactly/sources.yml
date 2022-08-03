@@ -2,7 +2,7 @@ version: 2
 
 sources:
   - name: xactly
-    database: '{{ env_var("SNOWFLAKE_LOAD_DATABASE") }}'
+    database: '{{ env_var("DBT_SNOWFLAKE_LOAD_DATABASE") }}'
     schema: tap_xactly
     loader: Stitch
     loaded_at_field: __loaded_at

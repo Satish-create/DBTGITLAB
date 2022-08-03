@@ -2,7 +2,7 @@ version: 2
 
 sources:
   - name: thanos
-    database: '{{ env_var("SNOWFLAKE_LOAD_DATABASE") }}'
+    database: '{{ env_var("DBT_SNOWFLAKE_LOAD_DATABASE") }}'
     schema: PROMETHEUS
     loader: snowflake_task
     loaded_at_field: UPLOADED_AT

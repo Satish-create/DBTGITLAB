@@ -2,7 +2,7 @@ version: 2
 
 sources:
   - name: google_analytics_360
-    database: '{{ env_var("SNOWFLAKE_LOAD_DATABASE") }}'
+    database: '{{ env_var("DBT_SNOWFLAKE_LOAD_DATABASE") }}'
     schema: google_analytics_360_fivetran
     loader: fivetran
     loaded_at_field: _FIVETRAN_SYNCED

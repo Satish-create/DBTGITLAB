@@ -3,7 +3,7 @@ version: 2
 sources:
   - name: salesforce
     tags: ["tdf","sfdc"]
-    database: '{{ env_var("SNOWFLAKE_LOAD_DATABASE") }}'
+    database: '{{ env_var("DBT_SNOWFLAKE_LOAD_DATABASE") }}'
     schema: salesforce_stitch
     loader: Stitch
     loaded_at_field: _sdc_batched_at

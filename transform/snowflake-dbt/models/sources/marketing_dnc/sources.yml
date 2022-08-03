@@ -2,7 +2,7 @@ version: 2
 
 sources:
   - name: marketing_dnc
-    database: '{{ env_var("SNOWFLAKE_LOAD_DATABASE") }}'
+    database: '{{ env_var("DBT_SNOWFLAKE_LOAD_DATABASE") }}'
     schema: marketing_dnc
 
     quoting:

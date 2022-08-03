@@ -3,7 +3,7 @@ version: 2
 sources:
   - name: version
     tags: ["tdf","version_db"]
-    database: '{{ env_var("SNOWFLAKE_LOAD_DATABASE") }}'
+    database: '{{ env_var("DBT_SNOWFLAKE_LOAD_DATABASE") }}'
     schema: version_db
     loaded_at_field: updated_at::TIMESTAMP
 

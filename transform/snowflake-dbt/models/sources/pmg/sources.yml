@@ -2,7 +2,7 @@ version: 2
 
 sources:
   - name: pmg
-    database: '{{ env_var("SNOWFLAKE_LOAD_DATABASE") }}'
+    database: '{{ env_var("DBT_SNOWFLAKE_LOAD_DATABASE") }}'
     schema: pmg
     loader: Airflow
     loaded_at_field: uploaded_at

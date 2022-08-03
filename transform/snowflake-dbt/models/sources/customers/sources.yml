@@ -2,7 +2,7 @@ version: 2
 
 sources:
   - name: customers
-    database: '{{ env_var("SNOWFLAKE_LOAD_DATABASE") }}'
+    database: '{{ env_var("DBT_SNOWFLAKE_LOAD_DATABASE") }}'
     schema: tap_postgres
     loader: Airflow
     tags: ["tdf", "customers_db"]
