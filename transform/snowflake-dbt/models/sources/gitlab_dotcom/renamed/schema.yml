@@ -154,10 +154,7 @@ models:
         tags: ["tdf","gitlab_dotcom"]
         tests:
           - not_null
-      - name: created_at
-        tags: ["tdf","gitlab_dotcom"]
-        tests:
-          - not_null
+      
 
   - name: gitlab_dotcom_ci_build_trace_chunks_source
     description: Base model for Gitlab.com ci_build_trace_chunks
@@ -728,10 +725,7 @@ models:
         tags: ["tdf","gitlab_dotcom"]
         tests:
           - not_null
-      - name: created_at
-        tags: ["tdf","gitlab_dotcom"]
-        tests:
-          - not_null
+      
       - name: state_id
         tags: ["tdf","gitlab_dotcom"]
         tests:
@@ -1145,10 +1139,7 @@ models:
         tags: ["tdf","gitlab_dotcom"]
         tests:
           - not_null
-      - name: created_at
-        tags: ["tdf","gitlab_dotcom"]
-        tests:
-          - not_null
+      
 
   - name: gitlab_dotcom_milestones_source
     description: Base model for Gitlab.com milestones

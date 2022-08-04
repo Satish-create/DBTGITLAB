@@ -3,7 +3,7 @@ version: 2
 sources:
   - name: zuora_central_sandbox
     tags: ["tdf","zuora_central_sandbox"]
-    database: '{{ env_var("SNOWFLAKE_LOAD_DATABASE") }}'
+    database: '{{ env_var("DBT_SNOWFLAKE_LOAD_DATABASE") }}'
     schema: zuora_central_sandbox_fivetran
     loader: fivetran
     loaded_at_field: _FIVETRAN_SYNCED

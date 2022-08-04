@@ -1,0 +1,4 @@
+# # Update docs-packages.yml as well to have the docs site be accurate.
+packages:
+  - package: dbt-labs/dbt_utils
+    version: 0.8.6
